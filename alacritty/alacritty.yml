@@ -1,0 +1,49 @@
+# test
+env:
+  TERM: xterm-256color
+live_config_reload: true
+window:
+  opacity: 1
+  decorations: buttonless
+  padding:
+    x: 5
+    y: 10
+  dimensions:
+    columns: 300
+    lines: 85
+colors:
+  primary:
+    background: '#24292e' # github dark
+    # background: '#1F1F28' # kanagawa
+  cursor:
+    text: '#f8f8f2'
+    # cursor: '#50fa7b'
+    cursor: '#FFFFFF'
+  normal:
+    black:   '#282a36'
+    red:     '#ff5555'
+    green:   '#50fa7b'
+    yellow:  '#f1fa8c'
+    blue:    '#bd93f9'
+    magenta: '#ff79c6'
+    cyan:    '#8be9fd'
+    white:   '#bfbfbf'
+  bright:
+    black:   '#44475a'
+    red:     '#ff6e67'
+    green:   '#5af78e'
+    yellow:  '#f4f99d'
+    blue:    '#caa9fa'
+    magenta: '#ff92d0'
+    cyan:    '#9aedfe'
+    white:   '#f8f8f2'
+font:
+  size: 14.0
+  use_thin_strokes: true
+  normal:
+    family: "Liga SFMono Nerd Font"
+  bold:
+    family: "Liga SFMono Nerd Font"
+  italics:
+    family: "Liga SFMono Nerd Font"
+
