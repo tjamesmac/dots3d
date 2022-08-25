@@ -1,4 +1,4 @@
-# dots2
+# dots3D
 
 ## ZSH
 Need to work out the root for the machine
