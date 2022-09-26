@@ -55,3 +55,13 @@ vim.api.nvim_create_user_command("OctanPackages", go_to_directory, {
 vim.api.nvim_create_user_command("Oct", go_to_octan, {
 	nargs = 0,
 })
+
+-- TODO: move this to somewhere else
+local function get_cwd(opts)
+	local path = opts.args
+	return cmd("lua require('telescope.builtin').find_files({ cwd = '" .. path .. "' })")
+end
+
+vim.api.nvim_create_user_command("TelescopeFindFiles", get_cwd, {
+	nargs = 1,
+})

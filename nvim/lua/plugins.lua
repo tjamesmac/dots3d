@@ -12,7 +12,6 @@ return require("packer").startup(function()
 
 	use({
 		"phaazon/hop.nvim",
-		-- branch = "v2",
 		config = function()
 			require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
 		end,
@@ -20,20 +19,6 @@ return require("packer").startup(function()
 
 	use({
 		"numToStr/Comment.nvim",
-	})
-
-	use("rebelot/kanagawa.nvim")
-
-	use({
-		"pwntester/octo.nvim",
-		requires = {
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
-			"kyazdani42/nvim-web-devicons",
-		},
-		config = function()
-			require("octo").setup()
-		end,
 	})
 
 	use({ "feline-nvim/feline.nvim" })
@@ -57,7 +42,8 @@ return require("packer").startup(function()
 
 	use({
 		"nvim-telescope/telescope.nvim",
-		requires = { { "nvim-lua/plenary.nvim" } },
+		tag = "0.1.0",
+		requires = { { "nvim-lua/plenary.nvim" }, { "nvim-telescope/telescope-live-grep-args.nvim" } },
 	})
 
 	-- THEME
@@ -76,16 +62,6 @@ return require("packer").startup(function()
 		after = "nvim-cmp",
 	})
 
-	use({
-		"folke/trouble.nvim",
-		requires = "kyazdani42/nvim-web-devicons",
-		config = function()
-			require("trouble").setup({})
-		end,
-	})
-
-	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
-
 	use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
 
 	use({ "ThePrimeagen/harpoon", requires = "nvim-lua/plenary.nvim" })
@@ -98,7 +74,5 @@ return require("packer").startup(function()
 
 	use({ "jose-elias-alvarez/null-ls.nvim", requires = "nvim-lua/plenary.nvim" })
 
-	use("ray-x/go.nvim")
-
-	-- use("github/copilot.vim")
+	-- use("rebelot/kanagawa.nvim")
 end)

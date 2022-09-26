@@ -1,4 +1,3 @@
-# test
 env:
   TERM: xterm-256color
 live_config_reload: true
@@ -41,9 +40,12 @@ font:
   size: 14.0
   use_thin_strokes: true
   normal:
-    family: "Liga SFMono Nerd Font"
+    family: "MesloLGS NF"
+    # family: "Liga SFMono Nerd Font"
   bold:
-    family: "Liga SFMono Nerd Font"
+    family: "MesloLGS NF"
+    # family: "Liga SFMono Nerd Font"
   italics:
-    family: "Liga SFMono Nerd Font"
+    family: "MesloLGS NF"
+    # family: "Liga SFMono Nerd Font"
 

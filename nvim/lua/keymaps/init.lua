@@ -1,5 +1,11 @@
 local api = vim.api
 
+local cwd_input = function()
+	vim.ui.input({ prompt = "Cwd for Telescope: " }, function(input)
+		require("telescope.builtin").find_files({ cwd = input })
+	end)
+end
+
 api.nvim_set_keymap("i", "jk", "<ESC>", { noremap = true, silent = true })
 api.nvim_set_keymap("i", "kj", "<ESC>", { noremap = true, silent = true })
 api.nvim_set_keymap("t", "jk", "<C-\\><C-n>", { noremap = true, silent = true })
@@ -14,10 +20,15 @@ api.nvim_set_keymap(
 	[[<Cmd>lua require('telescope.builtin').find_files()<CR>]],
 	{ noremap = true, silent = true }
 )
+
+vim.keymap.set("n", "<leader>fF", function()
+	cwd_input()
+end, { desc = "Input cwd for telescope" })
+
 api.nvim_set_keymap(
 	"n",
 	"<Leader>fg",
-	[[<Cmd>lua require('telescope.builtin').live_grep()<CR>]],
+	[[<Cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>]],
 	{ noremap = true, silent = true }
 )
 api.nvim_set_keymap(

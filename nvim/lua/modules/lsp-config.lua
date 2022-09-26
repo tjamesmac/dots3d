@@ -53,32 +53,38 @@ require("typescript").setup({
 	},
 })
 
-nvim_lsp.denols.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-	init_options = {
-		lint = true,
-	},
-  single_file_support = false,
-	root_dir = nvim_lsp.util.root_pattern("deno.json"),
-})
+-- nvim_lsp.denols.setup({
+-- 	on_attach = on_attach,
+-- 	capabilities = capabilities,
+-- 	init_options = {
+-- 		lint = true,
+-- 	},
+--   single_file_support = false,
+-- 	root_dir = nvim_lsp.util.root_pattern("deno.json"),
+-- })
 
-nvim_lsp.rust_analyzer.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-	settings = {
-		["rust-analyzer"] = {
-			checkOnSave = {
-				command = "clippy",
-			},
-		},
-	},
-})
+-- nvim_lsp.astro.setup({
+-- 	on_attach = on_attach,
+-- 	capabilities = capabilities,
+--   root_dir = nvim_lsp.util.root_pattern("astro.config.mjs")
+-- })
 
-nvim_lsp.gopls.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
+-- nvim_lsp.rust_analyzer.setup({
+-- 	on_attach = on_attach,
+-- 	capabilities = capabilities,
+-- 	settings = {
+-- 		["rust-analyzer"] = {
+-- 			checkOnSave = {
+-- 				command = "clippy",
+-- 			},
+-- 		},
+-- 	},
+-- })
+--
+-- nvim_lsp.gopls.setup({
+-- 	on_attach = on_attach,
+-- 	capabilities = capabilities,
+-- })
 
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")

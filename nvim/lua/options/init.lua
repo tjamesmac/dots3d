@@ -16,9 +16,9 @@ vim.g.loaded_matchparen = 1
 vim.g.loaded_logiPat = 1
 vim.g.loaded_rrhelper = 1
 
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-vim.g.loaded_netrwSettings = 1
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
+-- vim.g.loaded_netrwSettings = 1
 
 -- Options
 vim.opt.tgc = true
@@ -30,6 +30,7 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 -- Gutter
 vim.opt.number = true -- displays line numbers
+vim.opt.relativenumber = true
 vim.opt.signcolumn = "number"
 vim.opt.laststatus = 3
 vim.o.breakindent = true
