@@ -10,7 +10,7 @@ plugins=(
 )
 
 
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=1"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=3"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -24,6 +24,12 @@ export PATH=~/.emacs.d/bin:$PATH
 
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
+fd() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
 
 # Aliases go here
 alias root="cd"
