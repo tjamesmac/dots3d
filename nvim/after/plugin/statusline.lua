@@ -24,7 +24,8 @@ local components = {
 
 local colors = {
 	-- bg = "#1F1F28",
-	bg = "#24292e", -- github dark theme
+  -- github dark-theme = #24292e
+	bg = "0x24283b", -- github dark theme
 	black = "#282828",
 	yellow = "#d8a657",
 	cyan = "#89b482",
@@ -42,7 +43,7 @@ local colors = {
 local vi_mode_colors = {
 	NORMAL = "red",
 	OP = "green",
-	INSERT = "red",
+	INSERT = "green",
 	CONFIRM = "red",
 	VISUAL = "skyblue",
 	LINES = "skyblue",
@@ -126,7 +127,7 @@ components.active[1][2] = {
 -- filename
 components.active[1][3] = {
 	provider = function()
-		return vim.fn.expand("%:F")
+		return vim.fn.expand("%:t")
 	end,
 	hl = {
 		fg = "white",

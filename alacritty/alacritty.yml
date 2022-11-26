@@ -10,42 +10,101 @@ window:
   dimensions:
     columns: 300
     lines: 85
-colors:
-  primary:
-    background: '#24292e' # github dark
-    # background: '#1F1F28' # kanagawa
-  cursor:
-    text: '#f8f8f2'
-    # cursor: '#50fa7b'
-    cursor: '#FFFFFF'
-  normal:
-    black:   '#282a36'
-    red:     '#ff5555'
-    green:   '#50fa7b'
-    yellow:  '#f1fa8c'
-    blue:    '#bd93f9'
-    magenta: '#ff79c6'
-    cyan:    '#8be9fd'
-    white:   '#bfbfbf'
-  bright:
-    black:   '#44475a'
-    red:     '#ff6e67'
-    green:   '#5af78e'
-    yellow:  '#f4f99d'
-    blue:    '#caa9fa'
-    magenta: '#ff92d0'
-    cyan:    '#9aedfe'
-    white:   '#f8f8f2'
+schemes:
+  # Tokyo Night theme, based on both:
+  #   https://github.com/ghifarit53/tokyonight-vim
+  #   https://github.com/enkia/tokyo-night-vscode-theme
+  tokyo-night: &tokyo-night
+    # Default colors
+    primary:
+      background: '0x1a1b26'
+      foreground: '0xa9b1d6'
+
+    # Normal colors
+    normal:
+      black:   '0x32344a'
+      red:     '0xf7768e'
+      green:   '0x9ece6a'
+      yellow:  '0xe0af68'
+      blue:    '0x7aa2f7'
+      magenta: '0xad8ee6'
+      cyan:    '0x449dab'
+      white:   '0x787c99'
+
+    # Bright colors
+    bright:
+      black:   '0x444b6a'
+      red:     '0xff7a93'
+      green:   '0xb9f27c'
+      yellow:  '0xff9e64'
+      blue:    '0x7da6ff'
+      magenta: '0xbb9af7'
+      cyan:    '0x0db9d7'
+      white:   '0xacb0d0'
+
+  tokyo-night-storm: &tokyo-night-storm
+    # Default colors
+    primary:
+      background: '0x24283b'
+      foreground: '0xa9b1d6'
+
+    # Normal colors
+    normal:
+      black:   '0x32344a'
+      red:     '0xf7768e'
+      green:   '0x9ece6a'
+      yellow:  '0xe0af68'
+      blue:    '0x7aa2f7'
+      magenta: '0xad8ee6'
+      cyan:    '0x449dab'
+      white:   '0x9699a8'
+
+    # Bright colors
+    bright:
+      black:   '0x444b6a'
+      red:     '0xff7a93'
+      green:   '0xb9f27c'
+      yellow:  '0xff9e64'
+      blue:    '0x7da6ff'
+      magenta: '0xbb9af7'
+      cyan:    '0x0db9d7'
+      white:   '0xacb0d0'
+colors: *tokyo-night
+  # primary:
+  #   background: '#24292e' # github dark
+  #   # background: '#1F1F28' # kanagawa
+  # cursor:
+  #   text: '#f8f8f2'
+  #   # cursor: '#50fa7b'
+  #   cursor: '#FFFFFF'
+  # normal:
+  #   black:   '#282a36'
+  #   red:     '#ff5555'
+  #   green:   '#50fa7b'
+  #   yellow:  '#f1fa8c'
+  #   blue:    '#bd93f9'
+  #   magenta: '#ff79c6'
+  #   cyan:    '#8be9fd'
+  #   white:   '#bfbfbf'
+  # bright:
+  #   black:   '#44475a'
+  #   red:     '#ff6e67'
+  #   green:   '#5af78e'
+  #   yellow:  '#f4f99d'
+  #   blue:    '#caa9fa'
+  #   magenta: '#ff92d0'
+  #   cyan:    '#9aedfe'
+  #   white:   '#f8f8f2'
 font:
   size: 14.0
-  use_thin_strokes: true
   normal:
-    family: "MesloLGS NF"
-    # family: "Liga SFMono Nerd Font"
+    # family: "MesloLGS NF"
+    family: "Liga SFMono Nerd Font"
   bold:
-    family: "MesloLGS NF"
-    # family: "Liga SFMono Nerd Font"
+    # family: "MesloLGS NF"
+    family: "Liga SFMono Nerd Font"
   italics:
-    family: "MesloLGS NF"
-    # family: "Liga SFMono Nerd Font"
+    # family: "MesloLGS NF"
+    family: "Liga SFMono Nerd Font"
+
 

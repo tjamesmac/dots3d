@@ -24,6 +24,7 @@ vim.g.loaded_rrhelper = 1
 vim.opt.tgc = true
 vim.opt.hidden = true -- hides files when swapping between them instead of forcing a save
 vim.opt.ic = true
+vim.o.nosmd = true
 -- Tabs & spaces
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
@@ -37,9 +38,10 @@ vim.o.breakindent = true
 vim.o.termguicolors = true
 vim.o.swapfile = false
 vim.opt.list = true
-vim.opt.listchars:append("space:⋅")
+-- vim.opt.listchars:append("space:⋅")
 -- vim.opt.listchars:append("eol:↴")
-vim.wo.fillchars = "eob: "
+-- vim.wo.fillchars = "eob: "
+
 vim.opt.fillchars:append({
     horiz = '━',
     horizup = '┻',

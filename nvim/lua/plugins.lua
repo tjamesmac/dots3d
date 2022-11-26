@@ -1,14 +1,25 @@
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
+end
+
+local packer_bootstrap = ensure_packer()
 return require("packer").startup(function()
 	local use = require("packer").use
 
 	use("wbthomason/packer.nvim")
 	use({ "nvim-lua/plenary.nvim" })
-	use({
-		"lukas-reineke/indent-blankline.nvim",
-		config = function()
-			require("indent_blankline").setup()
-		end,
-	})
+	-- use({
+	-- 	"lukas-reineke/indent-blankline.nvim",
+	-- -- 	config = function()
+	-- -- 		require("indent_blankline").setup()
+	-- 	})
 
 	use({
 		"phaazon/hop.nvim",
@@ -74,5 +85,27 @@ return require("packer").startup(function()
 
 	use({ "jose-elias-alvarez/null-ls.nvim", requires = "nvim-lua/plenary.nvim" })
 
-	-- use("rebelot/kanagawa.nvim")
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+
+	use("rebelot/kanagawa.nvim")
+
+  -- Lua
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    -- config = function()
+    --   require("trouble").setup {
+    --     -- your configuration comes here
+    --     -- or leave it empty to use the default settings
+    --     -- refer to the configuration section below
+    --   }
+    -- end
+  }
+
+  use { "folke/tokyonight.nvim" }
+
+  if packer_bootstrap then
+    require('packer').sync()
+  end
+
 end)

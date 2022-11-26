@@ -6,6 +6,33 @@ local cwd_input = function()
 	end)
 end
 
+local function branch_name()
+	local branch = vim.fn.system("git branch --show-current 2> /dev/null | tr -d '\n'")
+	if branch ~= "" then
+		return branch
+	else
+		return ""
+	end
+end
+
+local open_code = function()
+  local cwd = vim.fn.getcwd()
+  local root = ''
+  for word in cwd:gmatch('[^/%s]+') do
+    root = word
+  end
+
+  local command = 'open '
+  local prefix = 'https://code.amazon.com/packages/'
+  local package = root .. '/'
+  local blob = 'blobs/'
+  local branch = branch_name() .. '/'
+  local path = vim.fn.expand('%')
+  local url = prefix .. package .. blob .. branch .. '--/' .. path
+  os.execute(command .. url)
+end
+
+
 api.nvim_set_keymap("i", "jk", "<ESC>", { noremap = true, silent = true })
 api.nvim_set_keymap("i", "kj", "<ESC>", { noremap = true, silent = true })
 api.nvim_set_keymap("t", "jk", "<C-\\><C-n>", { noremap = true, silent = true })
@@ -20,6 +47,11 @@ api.nvim_set_keymap(
 	[[<Cmd>lua require('telescope.builtin').find_files()<CR>]],
 	{ noremap = true, silent = true }
 )
+
+
+vim.keymap.set("n", "<leader>ow", function()
+  open_code()
+end, { desc = "Open current file in code-browser" })
 
 vim.keymap.set("n", "<leader>fF", function()
 	cwd_input()
@@ -108,7 +140,7 @@ api.nvim_set_keymap(
 api.nvim_set_keymap("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<CR>", { noremap = true, silent = true })
 api.nvim_set_keymap("n", "<leader>xl", "<cmd>TroubleToggle loclist<CR>", { noremap = true, silent = true })
 api.nvim_set_keymap("n", "<leader>xq", "<cmd>TroubleToggle quickfix<CR>", { noremap = true, silent = true })
-api.nvim_set_keymap("n", "gR", "<cmd>TroubleToggle lsp_references<CR>", { noremap = true, silent = true })
+api.nvim_set_keymap("n", "gr", "<cmd>TroubleToggle lsp_references<CR>", { noremap = true, silent = true })
 -- Git
 api.nvim_set_keymap("n", "<leader>gg", "<cmd>Neogit<CR>", { noremap = true, silent = true })
 -- Alias

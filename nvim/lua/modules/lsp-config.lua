@@ -3,7 +3,7 @@ local util = require("lspconfig.util")
 local null_ls = require("null-ls")
 local vim_util = vim.lsp.util
 
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local on_attach = function(client, bufnr)
 	local function buf_set_keymap(...)
@@ -23,7 +23,7 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
 	buf_set_keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 	buf_set_keymap("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-	buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+	-- buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 	buf_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
 	buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
 
@@ -52,22 +52,6 @@ require("typescript").setup({
 		root_dir = util.root_pattern("package.json"),
 	},
 })
-
--- nvim_lsp.denols.setup({
--- 	on_attach = on_attach,
--- 	capabilities = capabilities,
--- 	init_options = {
--- 		lint = true,
--- 	},
---   single_file_support = false,
--- 	root_dir = nvim_lsp.util.root_pattern("deno.json"),
--- })
-
--- nvim_lsp.astro.setup({
--- 	on_attach = on_attach,
--- 	capabilities = capabilities,
---   root_dir = nvim_lsp.util.root_pattern("astro.config.mjs")
--- })
 
 -- nvim_lsp.rust_analyzer.setup({
 -- 	on_attach = on_attach,
