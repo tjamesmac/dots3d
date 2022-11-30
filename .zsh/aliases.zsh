@@ -1,5 +1,6 @@
 alias .="cd .."
 alias ..="cd ../.."
+alias ...="cd ../../.."
 alias auth="kinit -f && mwinit"
 alias ada-dvwebnode="ada credentials update --account 092058474738 --provider conduit --role DevDesktopWinApp —profile default"
 alias startdvwebnode="brazil-build start -- --template=spa --cache --appName=PVWinApp"
@@ -15,6 +16,8 @@ alias bbs="bb start"
 alias gs="git status"
 alias gsw="git switch"
 alias gpl="git pull"
+alias gaa="git add --all"
+alias gps="git push"
 
 
 alias ls="exa --oneline --all"

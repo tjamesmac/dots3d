@@ -49,7 +49,7 @@ api.nvim_set_keymap(
 )
 
 
-vim.keymap.set("n", "<leader>ow", function()
+vim.keymap.set("n", "<leader>cw", function()
   open_code()
 end, { desc = "Open current file in code-browser" })
 
