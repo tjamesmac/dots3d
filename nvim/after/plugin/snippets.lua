@@ -102,4 +102,20 @@ ls.add_snippets("NeogitCommitMessage", {
 		t(" "),
 		i(2),
 	}),
+	s("p", {
+		f(function()
+			local branch = vim.fn.system("git rev-parse --abbrev-ref HEAD")
+			local ticket_number
+
+			for ticket in string.gmatch(branch, "[^-]+") do
+				ticket_number = ticket
+			end
+
+			-- sub needed because of weird \n getting added
+			return "[PVWinApp-" .. string.sub(ticket_number, 1, -2) .. "]" or ""
+		end),
+		t(" "),
+		i(2),
+	}),
+
 })

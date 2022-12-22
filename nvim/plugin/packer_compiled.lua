@@ -137,11 +137,6 @@ _G.packer_plugins = {
     path = "/Users/tjamc/.local/share/nvim/site/pack/packer/start/hop.nvim",
     url = "https://github.com/phaazon/hop.nvim"
   },
-  ["kanagawa.nvim"] = {
-    loaded = true,
-    path = "/Users/tjamc/.local/share/nvim/site/pack/packer/start/kanagawa.nvim",
-    url = "https://github.com/rebelot/kanagawa.nvim"
-  },
   ["lspkind.nvim"] = {
     loaded = true,
     path = "/Users/tjamc/.local/share/nvim/site/pack/packer/start/lspkind.nvim",
@@ -181,11 +176,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/tjamc/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
-  },
-  ["nvim-treesitter-textsubjects"] = {
-    loaded = true,
-    path = "/Users/tjamc/.local/share/nvim/site/pack/packer/start/nvim-treesitter-textsubjects",
-    url = "https://github.com/RRethy/nvim-treesitter-textsubjects"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
@@ -231,6 +221,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/tjamc/.local/share/nvim/site/pack/packer/start/typescript.nvim",
     url = "https://github.com/jose-elias-alvarez/typescript.nvim"
+  },
+  undotree = {
+    loaded = true,
+    path = "/Users/tjamc/.local/share/nvim/site/pack/packer/start/undotree",
+    url = "https://github.com/mbbill/undotree"
   },
   ["vim-surround"] = {
     loaded = true,

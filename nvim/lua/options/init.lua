@@ -42,6 +42,10 @@ vim.opt.list = true
 -- vim.opt.listchars:append("eol:↴")
 -- vim.wo.fillchars = "eob: "
 
+-- Undo
+vim.opt.undodir = os.getenv('HOME') .. "/.config/undodir"
+vim.opt.undofile = true
+
 vim.opt.fillchars:append({
     horiz = '━',
     horizup = '┻',
