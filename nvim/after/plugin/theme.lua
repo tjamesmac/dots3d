@@ -48,12 +48,6 @@ end
 --
 -- vim.cmd("colorscheme tokyonight-night")
 
--- require("indent_blankline").setup({
--- 	show_end_of_line = true,
--- 	space_char_blankline = " ",
--- })
-
-
 require("github-theme").setup({
 	theme_style = "dark_default", -- "dark" | "dark_default" | "dimmed" | dark_colorblind
 	function_style = "NONE",

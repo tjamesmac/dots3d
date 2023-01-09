@@ -136,13 +136,17 @@ colors: *github-dark-default
 font:
   size: 16.0
   normal:
-    family: "MesloLGS NF"
+    family: "Hack Nerd Font"
+    # family: "Iosevka Nerd Font"
+    # family: "MesloLGS NF"
     # family: "Liga SFMono Nerd Font"
   bold:
-    family: "MesloLGS NF"
+    family: "Hack Nerd Font"
+    # family: "Iosevka Nerd Font"
+    # family: "MesloLGS NF"
     # family: "Liga SFMono Nerd Font"
   italics:
-    family: "MesloLGS NF"
+    family: "Hack Nerd Font"
+    # family: "Iosevka Nerd Font"
+    # family: "MesloLGS NF"
     # family: "Liga SFMono Nerd Font"
-
-

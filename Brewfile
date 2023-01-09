@@ -27,5 +27,6 @@ cask "rectangle"
 cask "raycast"
 cask "alacritty"
 cask "visual-studio-code"
+cask "amethyst"
 
 # 'mas ""'

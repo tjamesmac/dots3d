@@ -36,15 +36,9 @@ cmp.setup({
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.abort(),
 		["<CR>"] = cmp.mapping.confirm({ select = true }),
-		["<C-j>"] = cmp.mapping(function()
-			cmp.mapping.abort()
-			-- local copilot_keys = vim.fn["copilot#Accept"]()
-			-- if copilot_keys ~= "" then
-			-- 	vim.api.nvim_feedkeys(copilot_keys, "i", true)
-			-- else
-			-- 	fallback()
-			-- end
-		end),
+		-- ["<C-j>"] = cmp.mapping(function()
+		-- 	cmp.mapping.abort()
+		-- end),
 		["<Tab>"] = cmp.mapping(function(fallback)
 			local luasnip = require("luasnip")
 			if cmp.visible() then
