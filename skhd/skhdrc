@@ -1,0 +1,53 @@
+# yabai -m window --focus stack.first
+alt + cmd - s : yabai -m config layout stack
+alt - o : yabai -m window --focus stack.prev || yabai -m window --focus stack.last
+alt - p : yabai -m window --focus stack.next || yabai -m window --focus stack.first
+
+
+# These have been commented out because I've had enough of them
+# These work similar to control center moving between things
+# ctrl - 1 : yabai -m window --focus $(yabai -m query --windows | jq '.[] | select(.app == "kitty" or .app == "Code") | select(."has-focus" != true) | .id')
+# ctrl - 2 : yabai -m window --focus $(yabai -m query --windows | jq '.[] | select(.app == "Google Chrome") | .id')
+# ctrl - 3 : yabai -m window --focus $(yabai -m query --windows | jq '.[] | select(.app == "Slack") | select(."has-focus" != true) | .id')
+# ctrl - 4 : yabai -m window --focus $(yabai -m query --windows | jq '.[] | select(.app == "Microsoft Outlook") | .id')
+# ctrl - 5 : yabai -m window --focus $(yabai -m query --windows | jq '.[] | select(.app == "Spotify") | .id')
+# ctrl - 7 : yabai -m window --focus $(yabai -m query --windows | jq '.[] | select(.app == 6) | .id')
+# ctrl - 7 : yabai -m window --focus $(yabai -m query --windows | jq '.[] | select(.app == 7) | .id')
+# ctrl - 8 : yabai -m window --focus $(yabai -m query --windows | jq '.[] | select(.app == 8) | .id')
+# ctrl - 9 : yabai -m window --focus $(yabai -m query --windows | jq '.[] | select(.app == 9) | .id')
+
+# alt - 1 : yabai -m window --focus $(yabai -m query --windows | jq '.[] | select(.stack-index == "kitty") | .id')
+# alt - 2 : yabai -m window --focus $(yabai -m query --windows | jq '.[] | select(.app == "Google Chrome") | .id')
+# alt - 3 : yabai -m window --focus $(yabai -m query --windows | jq '.[] | select(.app == "slack") | .id')
+# alt - 4 : yabai -m window --focus $(yabai -m query --windows | jq '.[] | select(.app == "Microsoft Outlook") | .id')
+# alt - 5 : yabai -m window --focus $(yabai -m query --windows | jq '.[] | select(.app == "Spotify") | .id')
+# don't delete these
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# yabai -m query --spaces --display 1 | jq 'map(select(.app == "kitty"))'
+# alt - 1 : yabai -m window --stack-index 1
+# alt - 2 : yabai -m window --stack-index 2
+# alt - 3 : yabai -m window --stack-index 3
+# alt - 4 : yabai -m window --stack-index 4
+# yabai -m window --focus stack.recent
+# yabai -m window --focus stack.last

@@ -1,0 +1,4 @@
+.zsh/.zsh_history
+.zsh/env.zsh
+.DS_store
+Brewfile.lock.json
