@@ -19,3 +19,5 @@ alias ls="exa --oneline --all"
 alias gamma="ssh $MYHOST"
 
 alias gb="git branch --sort=-committerdate | gum filter | xargs git switch"
+
+alias cd="cd abcd"

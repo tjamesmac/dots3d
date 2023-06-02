@@ -4,6 +4,10 @@ export PATH="$N_PREFIX/bin:$PATH"
 export PATH=~/.emacs.d/bin:$PATH
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+abcd() {
+  cd $(~/go/bin/abcd)
+}
+
 # Go stuff
 export GOPATH=$HOME/go
 export GOROOT=/usr/local/go
