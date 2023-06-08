@@ -11,6 +11,6 @@ setopt appendhistory
 setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 
-bindkey '^ ' autosuggest-execute
+bindkey '^[' autosuggest-execute
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down

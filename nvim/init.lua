@@ -639,6 +639,7 @@ require("lazy").setup({
         })
 
         -- lsp.skip_server_setup({'tsserver'})
+        lsp.skip_server_setup({'denols'})
 
         local on_attach = function(client, bufnr)
           local function buf_set_keymap(...)
@@ -705,7 +706,7 @@ require("lazy").setup({
         --   cmp_capabilities = capabilities,
         --   single_file_support = false,
         -- })
-
+        --
         lsp.setup()
       end,
       dependencies = {
