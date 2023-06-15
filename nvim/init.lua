@@ -21,12 +21,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     { "nvim-lua/plenary.nvim" },
 
-    {
-      "phaazon/hop.nvim",
-      opts = {
-        keys = "etovxqpdygfblzhckisuran"
-      }
-    },
+    { "ggandor/lightspeed.nvim" },
 
     {
       "numToStr/Comment.nvim",
@@ -375,30 +370,27 @@ require("lazy").setup({
 
     {
       "lewis6991/gitsigns.nvim",
-      opts = {
-        signcolumn = false
-      },
     },
 
-    {
-      "kyazdani42/nvim-tree.lua",
-      opts = {
-        view = {
-          adaptive_size = true,
-          side = "right",
-        },
-        actions = {
-          open_file = {
-            window_picker = {
-              enable = false,
-            },
-          },
-        },
-      },
-      dependencies = {
-        "kyazdani42/nvim-web-devicons",
-      },
-    },
+    -- {
+    --   "kyazdani42/nvim-tree.lua",
+    --   opts = {
+    --     view = {
+    --       adaptive_size = true,
+    --       side = "right",
+    --     },
+    --     actions = {
+    --       open_file = {
+    --         window_picker = {
+    --           enable = false,
+    --         },
+    --       },
+    --     },
+    --   },
+    --   dependencies = {
+    --     "kyazdani42/nvim-web-devicons",
+    --   },
+    -- },
 
     {
       "windwp/nvim-autopairs",
@@ -491,20 +483,16 @@ require("lazy").setup({
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 
     {
-      "projekt0n/github-nvim-theme",
-      branch = "0.0.x",
+      'projekt0n/github-nvim-theme',
+      -- lazy = false, -- make sure we load this during startup if it is your main colorscheme
+      -- priority = 1000, -- make sure to load this before all the other start plugins
       config = function()
-        -- require("github-theme").setup(
-        --   {
-        --     theme_style = "light",
-        --     function_style = "NONE",
-        --     dark_sidebar = true,
-        --     sidebars = { "vista_kind", "packer" },
-        --     transparent = false,
-        --     colors = { hint = "orange", error = "#ff0000" },
-        --   }
-        -- )
-      end
+        require('github-theme').setup({
+          -- ...
+        })
+
+        vim.cmd('colorscheme github_dark_high_contrast')
+      end,
     },
 
     -- AUTOCOMPLETION
@@ -632,10 +620,10 @@ require("lazy").setup({
           'cssmodules_ls',
           'tsserver',
           'eslint',
-          'gopls',
-          -- 'sumneko_lua',
+          -- 'gopls',
           'lua_ls',
-          'rust_analyzer'
+          'rust_analyzer',
+          'denols'
         })
 
         -- lsp.skip_server_setup({'tsserver'})
@@ -703,12 +691,15 @@ require("lazy").setup({
           on_attach = on_attach,
         })
 
-
-
         -- lsp.configure('cssmodules_ls', {
         --   on_attach = on_attach
         -- })
 
+        lsp.configure('denols', {
+          on_attach = on_attach,
+          cmp_capabilities = capabilities,
+          single_file_support = false,
+        })
 
         lsp.setup()
       end,
@@ -825,7 +816,7 @@ require("lazy").setup({
           },
         })
 
-        vim.cmd('colorscheme catppuccin')
+        -- vim.cmd('colorscheme catppuccin')
       end
     }
   },

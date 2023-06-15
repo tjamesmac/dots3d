@@ -7,22 +7,13 @@ local cwd_input = function()
   end)
 end
 
-local function branch_name()
-  local branch = vim.fn.system("git branch --show-current 2> /dev/null | tr -d '\n'")
-  if branch ~= "" then
-    return branch
-  else
-    return ""
-  end
-end
-
 api.nvim_set_keymap('n', "<Leader>u", "<cmd>UndotreeToggle<CR>", { noremap = true, silent = true })
 
 api.nvim_set_keymap("i", "jk", "<ESC>", { noremap = true, silent = true })
 api.nvim_set_keymap("i", "kj", "<ESC>", { noremap = true, silent = true })
 api.nvim_set_keymap("t", "jk", "<C-\\><C-n>", { noremap = true, silent = true })
 api.nvim_set_keymap("n", "<Leader>w", "<C-w>", { noremap = true, silent = true })
-api.nvim_set_keymap("n", "<Leader>o", [[<Cmd>NvimTreeFindFileToggle<CR>]], { noremap = true, silent = true })
+-- api.nvim_set_keymap("n", "<Leader>o", [[<Cmd>NvimTreeFindFileToggle<CR>]], { noremap = true, silent = true })
 api.nvim_set_keymap("n", "<Leader>`", [[<Cmd>e#<CR>]], { noremap = true, silent = true })
 -- -- Telescope
 api.nvim_set_keymap(
@@ -32,7 +23,7 @@ api.nvim_set_keymap(
   { noremap = true, silent = true }
 )
 
-vim.keymap.set("n", "<leader>fs", function()
+vim.keymap.set("n", "<leader>r", function()
   if vim.bo.filetype ~= 'go' and vim.bo.filetype ~= 'lua' and vim.bo.filetype ~= 'rust' then
     print('Prettier')
     return vim.cmd.Prettier()
@@ -71,7 +62,8 @@ api.nvim_set_keymap(
   { noremap = true, silent = true }
 )
 api.nvim_set_keymap("n", "<Leader>fh", [[<Cmd>Telescope harpoon marks<CR>]], { noremap = true, silent = true })
-api.nvim_set_keymap("n", "<Leader>fb", [[<Cmd>lua require('telescope.builtin').git_branches()<CR>]], { noremap = true, silent = true })
+api.nvim_set_keymap("n", "<Leader>fb", [[<Cmd>lua require('telescope.builtin').git_branches()<CR>]],
+  { noremap = true, silent = true })
 
 -- Harpoon
 api.nvim_set_keymap(
@@ -132,48 +124,7 @@ api.nvim_set_keymap("n", "gR", "<cmd>TroubleToggle lsp_references<CR>", { norema
 -- Git
 api.nvim_set_keymap("n", "<leader>gg", "<cmd>Neogit<CR>", { noremap = true, silent = true })
 -- Alias
-api.nvim_set_keymap(
-  "n",
-  "<leader>do",
-  [[<Cmd>lua require('test').go_to_octan()<CR>]],
-  { noremap = true, silent = true }
-)
-api.nvim_set_keymap(
-  "n",
-  "<leader>ds",
-  [[<Cmd>lua require('test').go_to_service()<CR>]],
-  { noremap = true, silent = true }
-)
 
--- Hop
-api.nvim_set_keymap(
-  "",
-  "f",
-  "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>"
-  ,
-  {}
-)
-api.nvim_set_keymap(
-  "",
-  "F",
-  "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>"
-  ,
-  {}
-)
-api.nvim_set_keymap(
-  "",
-  "t",
-  "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<cr>"
-  ,
-  {}
-)
-api.nvim_set_keymap(
-  "",
-  "T",
-  "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<cr>"
-  ,
-  {}
-)
 
 -- luasnip
 api.nvim_set_keymap("i", "<C-E>", "<Plug>luasnip-next-choice", {})
@@ -195,8 +146,8 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>qa", "ZZ")
 
-vim.keymap.set({'n', 't'}, '<C-h>', '<CMD>NavigatorLeft<CR>')
-vim.keymap.set({'n', 't'}, '<C-l>', '<CMD>NavigatorRight<CR>')
-vim.keymap.set({'n', 't'}, '<C-k>', '<CMD>NavigatorUp<CR>')
-vim.keymap.set({'n', 't'}, '<C-j>', '<CMD>NavigatorDown<CR>')
+vim.keymap.set({ 'n', 't' }, '<C-h>', '<CMD>NavigatorLeft<CR>')
+vim.keymap.set({ 'n', 't' }, '<C-l>', '<CMD>NavigatorRight<CR>')
+vim.keymap.set({ 'n', 't' }, '<C-k>', '<CMD>NavigatorUp<CR>')
+vim.keymap.set({ 'n', 't' }, '<C-j>', '<CMD>NavigatorDown<CR>')
 -- vim.keymap.set({'n', 't'}, '<C-p>', '<CMD>NavigatorPrevious<CR>')
