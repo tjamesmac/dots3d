@@ -19,6 +19,40 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+    {
+      'glepnir/dashboard-nvim',
+      event = 'VimEnter',
+      config = function()
+        require('dashboard').setup {
+          -- config
+          config = {
+            header = {
+              "                                                                              ",
+              "=================     ===============     ===============   ========  ========",
+              "\\\\ . . . . . . .\\\\   //. . . . . . .\\\\   //. . . . . . .\\\\  \\\\. . .\\\\// . . //",
+              "||. . ._____. . .|| ||. . ._____. . .|| ||. . ._____. . .|| || . . .\\/ . . .||",
+              "|| . .||   ||. . || || . .||   ||. . || || . .||   ||. . || ||. . . . . . . ||",
+              "||. . ||   || . .|| ||. . ||   || . .|| ||. . ||   || . .|| || . | . . . . .||",
+              "|| . .||   ||. _-|| ||-_ .||   ||. . || || . .||   ||. _-|| ||-_.|\\ . . . . ||",
+              "||. . ||   ||-'  || ||  `-||   || . .|| ||. . ||   ||-'  || ||  `|\\_ . .|. .||",
+              "|| . _||   ||    || ||    ||   ||_ . || || . _||   ||    || ||   |\\ `-_/| . ||",
+              "||_-' ||  .|/    || ||    \\|.  || `-_|| ||_-' ||  .|/    || ||   | \\  / |-_.||",
+              "||    ||_-'      || ||      `-_||    || ||    ||_-'      || ||   | \\  / |  `||",
+              "||    `'         || ||         `'    || ||    `'         || ||   | \\  / |   ||",
+              "||            .===' `===.         .==='.`===.         .===' /==. |  \\/  |   ||",
+              "||         .=='   \\_|-_ `===. .==='   _|_   `===. .===' _-|/   `==  \\/  |   ||",
+              "||      .=='    _-'    `-_  `='    _-'   `-_    `='  _-'   `-_  /|  \\/  |   ||",
+              "||   .=='    _-'          `-__\\._-'         `-_./__-'         `' |. /|  |   ||",
+              "||.=='    _-'                                                     `' |  /==.||",
+              "=='    _-'                        N E O V I M                         \\/   `==",
+              "\\   _-'                                                                `-_   /",
+              " `''                                                                      ``'  ",
+            }
+          } }
+      end,
+      dependencies = { { 'nvim-tree/nvim-web-devicons' } }
+    },
+
     { "nvim-lua/plenary.nvim" },
 
     { "ggandor/lightspeed.nvim" },
@@ -373,7 +407,7 @@ require("lazy").setup({
     },
 
     -- {
-    --   "kyazdani42/nvim-tree.lua",
+    --   "nvim-tree/nvim-tree.lua",
     --   opts = {
     --     view = {
     --       adaptive_size = true,
@@ -388,7 +422,7 @@ require("lazy").setup({
     --     },
     --   },
     --   dependencies = {
-    --     "kyazdani42/nvim-web-devicons",
+    --     "nvim-tree/nvim-web-devicons",
     --   },
     -- },
 
@@ -461,6 +495,7 @@ require("lazy").setup({
             file_ignore_patterns = {
               "node_modules",
               "yarn.lock",
+              "deno.lock",
             },
             layout_strategy = "vertical",
             layout_config = {
@@ -652,7 +687,7 @@ require("lazy").setup({
           buf_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
           buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
           if client.name ~= "tsserver" and client.name ~= "cssls" and client.name ~= 'rust_analyzer' then
-            vim.keymap.set("n", "<leader>fs", function()
+            vim.keymap.set("n", "<leader>s", function()
               local params = vim.lsp.util.make_formatting_params({})
               client.request("textDocument/formatting", params, nil, bufnr)
             end, { buffer = bufnr })
@@ -691,15 +726,10 @@ require("lazy").setup({
           on_attach = on_attach,
         })
 
+        -- TODO: one day
         -- lsp.configure('cssmodules_ls', {
         --   on_attach = on_attach
         -- })
-
-        lsp.configure('denols', {
-          on_attach = on_attach,
-          cmp_capabilities = capabilities,
-          single_file_support = false,
-        })
 
         lsp.setup()
       end,
@@ -725,15 +755,11 @@ require("lazy").setup({
     { "tpope/vim-surround" },
 
     { "jose-elias-alvarez/typescript.nvim" },
-    { "jose-elias-alvarez/null-ls.nvim",   dependencies = "nvim-lua/plenary.nvim" },
 
-    -- Lua
     {
       "folke/trouble.nvim",
-      dependencies = "kyazdani42/nvim-web-devicons",
+      dependencies = "nvim-tree/nvim-web-devicons",
     },
-
-    { "folke/tokyonight.nvim" },
 
     { "mbbill/undotree" },
 
@@ -741,87 +767,53 @@ require("lazy").setup({
 
     { 'JoosepAlviste/nvim-ts-context-commentstring' },
 
-    -- {
-    --   "folke/noice.nvim",
-    --   event = "VeryLazy",
-    --   views = {
-    --     cmdline_popup = {
-    --       border = {
-    --         style = "none",
-    --         padding = { 2, 3 },
-    --       },
-    --       filter_options = {},
-    --       win_options = {
-    --         winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
-    --       },
-    --     },
-    --   },
-    --   opts = {
-    --     lsp = {
-    --       override = {
-    --         ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-    --         ["vim.lsp.util.stylize_markdown"] = true,
-    --       },
-    --     },
-    --     presets = {
-    --       bottom_search = true,
-    --       command_palette = false,
-    --       long_message_to_split = true,
-    --     },
-    --   },
-    --   dependencies = {
-    --     "MunifTanjim/nui.nvim",
-    --     "rcarriga/nvim-notify",
-    --   }
-    -- },
+    {
+      "folke/noice.nvim",
+      event = "VeryLazy",
+      views = {
+        cmdline_popup = {
+          border = {
+            style = "none",
+            padding = { 2, 3 },
+          },
+          filter_options = {},
+          win_options = {
+            winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
+          },
+        },
+      },
+      opts = {
+        lsp = {
+          override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+          },
+        },
+        presets = {
+          bottom_search = true,
+          command_palette = false,
+          long_message_to_split = true,
+        },
+      },
+      dependencies = {
+        "MunifTanjim/nui.nvim",
+        "rcarriga/nvim-notify",
+      }
+    },
 
     { "norcalli/nvim-colorizer.lua" },
 
     { "ray-x/go.nvim" },
 
-    {
-      "rebelot/kanagawa.nvim",
-      config = function()
-        -- vim.cmd('colorscheme kanagawa')
-      end
-    },
-
+    -- move between tmux and nvim easily
     {
       "numToStr/Navigator.nvim",
       config = function()
         require('Navigator').setup()
       end
     },
-
-    {
-      "catppuccin/nvim",
-      config = function()
-        require('catppuccin').setup({
-          flavour = "frappe",
-          color_overrides = {
-            mocha = {
-              base = "#000000",
-            },
-          },
-          integrations = {
-            nvimtree = true,
-            telescope = false,
-          },
-          highlight_overrides = {
-            mocha = function(mocha)
-              return {
-                NvimTreeNormal = { bg = mocha.none },
-              }
-            end,
-          },
-        })
-
-        -- vim.cmd('colorscheme catppuccin')
-      end
-    }
   },
-
-
   {})
 
+require('keymaps')
 require('keymaps')
