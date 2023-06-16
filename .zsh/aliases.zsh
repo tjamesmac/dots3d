@@ -18,3 +18,5 @@ alias gamma="ssh $MYHOST"
 alias gb="git branch --sort=-committerdate | gum filter | xargs git switch"
 
 alias dt="deno task"
+
+alias vim="nvim"
