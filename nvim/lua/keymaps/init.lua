@@ -23,7 +23,7 @@ api.nvim_set_keymap(
   { noremap = true, silent = true }
 )
 
-vim.keymap.set("n", "<leader>r", function()
+vim.keymap.set("n", "<leader>s", function()
   if vim.bo.filetype ~= 'go' and vim.bo.filetype ~= 'lua' and vim.bo.filetype ~= 'rust' then
     print('Prettier')
     return vim.cmd.Prettier()
