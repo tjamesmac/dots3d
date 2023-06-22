@@ -349,6 +349,7 @@ require("lazy").setup({
               workspace = {
                 -- Make the server aware of Neovim runtime files
                 library = vim.api.nvim_get_runtime_file("", true),
+                checkThirdParty = false,
               },
             },
           },
@@ -418,6 +419,9 @@ require("lazy").setup({
     {
       "folke/trouble.nvim",
       dependencies = "nvim-tree/nvim-web-devicons",
+      opts = {
+        position = 'right'
+      }
     },
 
     { "mbbill/undotree" },
@@ -513,6 +517,54 @@ require("lazy").setup({
       "numToStr/Navigator.nvim",
       config = function()
         require('Navigator').setup()
+      end
+    },
+
+    -- Lua
+    {
+      "folke/persistence.nvim",
+      event = "BufReadPre", -- this will only start session saving when an actual file was opened
+      opts = {}
+    },
+
+    {
+      "folke/flash.nvim",
+      event = "VeryLazy",
+      opts = {},
+      keys = {
+        {
+          "s",
+          mode = { "n", "x", "o" },
+          function()
+            -- default options: exact mode, multi window, all directions, with a backdrop
+            require("flash").jump()
+          end,
+        },
+        {
+          "S",
+          mode = { "n", "o", "x" },
+          function()
+            require("flash").treesitter()
+          end,
+        },
+      },
+    },
+    {
+      'stevearc/oil.nvim',
+      opts = {},
+      -- Optional dependencies
+      dependencies = { "nvim-tree/nvim-web-devicons" },
+    },
+
+    {
+      "rebelot/heirline.nvim",
+      -- You can optionally lazy-load heirline on UiEnter
+      -- to make sure all required plugins and colorschemes are loaded before setup
+      event = "VeryLazy",
+      config = function()
+        require("heirline").setup({
+          -- config goes here
+        })
       end
     },
   },

@@ -150,3 +150,10 @@ vim.keymap.set({ 'n', 't' }, '<C-l>', '<CMD>NavigatorRight<CR>')
 vim.keymap.set({ 'n', 't' }, '<C-k>', '<CMD>NavigatorUp<CR>')
 vim.keymap.set({ 'n', 't' }, '<C-j>', '<CMD>NavigatorDown<CR>')
 -- vim.keymap.set({'n', 't'}, '<C-p>', '<CMD>NavigatorPrevious<CR>')
+
+
+-- restore the session for the current directory
+vim.keymap.set("n", "<leader>qs", [[<cmd>lua require("persistence").load()<cr>]])
+
+-- stop Persistence => session won't be saved on exit
+vim.keymap.set("n", "<leader>qd", [[<cmd>lua require("persistence").stop()<cr>]])
