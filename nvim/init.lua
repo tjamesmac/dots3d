@@ -3,7 +3,7 @@ vim.g.globalstatus = true
 
 require("options")
 
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath("data") .. "elazy/lazy.nvim"
 
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -66,9 +66,10 @@ require("lazy").setup({
       end,
     },
 
-    {
-      "lewis6991/gitsigns.nvim",
-    },
+    -- {
+    --   "lewis6991/gitsigns.nvim",
+    -- },
+    --
 
     {
       "windwp/nvim-autopairs",
@@ -97,7 +98,8 @@ require("lazy").setup({
           "go",
           "markdown",
           "markdown_inline",
-          "regex"
+          "regex",
+          "vim"
         },
         highlight = {
           enable = true,
@@ -141,10 +143,10 @@ require("lazy").setup({
               "yarn.lock",
               "deno.lock",
             },
-            layout_strategy = "vertical",
-            layout_config = {
-              horizontal = { width = 0.9 },
-            },
+            layout_strategy = "bottom_pane",
+            -- layout_config = {
+            --   horizontal = { width = 0.9 },
+            -- },
           },
         })
         require("telescope").load_extension("harpoon")
@@ -295,7 +297,7 @@ require("lazy").setup({
         lsp.ensure_installed({
           'html',
           'cssmodules_ls',
-          'tsserver',
+          -- 'tsserver',
           'eslint',
           -- 'gopls',
           'lua_ls',
@@ -443,7 +445,7 @@ require("lazy").setup({
           -- https://github.com/folke/noice.nvim/wiki/Configuration-Recipes
           cmdline_popup = {
             border = {
-              style = "none",
+              -- style = "none",
               padding = { 2, 3 },
             },
             filter_options = {},
@@ -470,12 +472,15 @@ require("lazy").setup({
               winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" },
             },
           },
-
+          notify = {
+            render = 'compact'
+          },
         },
         lsp = {
           override = {
             ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
             ["vim.lsp.util.stylize_markdown"] = true,
+            ["cmp.entry.get_documentation"] = true,
           },
         },
         presets = {
@@ -485,7 +490,6 @@ require("lazy").setup({
           inc_rename = false,
         },
       },
-
       dependencies = {
         "MunifTanjim/nui.nvim",
         "rcarriga/nvim-notify",
@@ -495,6 +499,14 @@ require("lazy").setup({
     { "norcalli/nvim-colorizer.lua" },
 
     { "ray-x/go.nvim" },
+
+    {
+      "pmizio/typescript-tools.nvim",
+      dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+      opts = {},
+    },
+
+    { "lewis6991/gitsigns.nvim" },
 
     -- move between tmux and nvim easily
     {

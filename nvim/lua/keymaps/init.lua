@@ -1,25 +1,26 @@
--- Need to sort out these key map things
-local api = vim.api
+vim.keymap.set('n', "<Leader>u", "<cmd>UndotreeToggle<CR>", { noremap = true, silent = true })
 
-local cwd_input = function()
-  vim.ui.input({ prompt = "Cwd for Telescope: " }, function(input)
-    require("telescope.builtin").find_files({ cwd = input })
-  end)
-end
-
-api.nvim_set_keymap('n', "<Leader>u", "<cmd>UndotreeToggle<CR>", { noremap = true, silent = true })
-
-api.nvim_set_keymap("i", "jk", "<ESC>", { noremap = true, silent = true })
-api.nvim_set_keymap("i", "kj", "<ESC>", { noremap = true, silent = true })
-api.nvim_set_keymap("t", "jk", "<C-\\><C-n>", { noremap = true, silent = true })
-api.nvim_set_keymap("n", "<Leader>w", "<C-w>", { noremap = true, silent = true })
--- api.nvim_set_keymap("n", "<Leader>o", [[<Cmd>NvimTreeFindFileToggle<CR>]], { noremap = true, silent = true })
-api.nvim_set_keymap("n", "<Leader>`", [[<Cmd>e#<CR>]], { noremap = true, silent = true })
+vim.keymap.set("i", "jk", "<ESC>", { noremap = true, silent = true })
+vim.keymap.set("i", "kj", "<ESC>", { noremap = true, silent = true })
+vim.keymap.set("t", "jk", "<C-\\><C-n>", { noremap = true, silent = true })
+vim.keymap.set("n", "<Leader>w", "<C-w>", { noremap = true, silent = true })
+vim.keymap.set("n", "<Leader>`", function()
+  vim.cmd('e#')
+end, { noremap = true, silent = true })
 -- -- Telescope
-api.nvim_set_keymap(
+vim.keymap.set(
+  "n",
+  "<Leader>tt",
+  vim.cmd.Telescope,
+  { noremap = true, silent = true }
+)
+
+vim.keymap.set(
   "n",
   "<Leader>ff",
-  [[<Cmd>lua require('telescope.builtin').find_files()<CR>]],
+  function()
+    vim.cmd.Telescope('find_files')
+  end,
   { noremap = true, silent = true }
 )
 
@@ -37,72 +38,72 @@ vim.keymap.set("n", "<leader>fF", function()
   cwd_input()
 end, { desc = "Input cwd for telescope" })
 
-api.nvim_set_keymap(
+vim.keymap.set(
   "n",
   "<Leader>fg",
   [[<Cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>]],
   { noremap = true, silent = true }
 )
-api.nvim_set_keymap(
+vim.keymap.set(
   "n",
   "<Leader>fd",
   [[<Cmd>lua require('telescope.builtin').grep_string()<CR>]],
   { noremap = true, silent = true }
 )
-api.nvim_set_keymap(
+vim.keymap.set(
   "n",
   "<Leader>fb",
   [[<Cmd>lua require('telescope.builtin').buffers()<CR>]],
   { noremap = true, silent = true }
 )
-api.nvim_set_keymap(
+vim.keymap.set(
   "n",
   "<Leader>fq",
   [[<Cmd>lua require('telescope.builtin').quickfix()<CR>]],
   { noremap = true, silent = true }
 )
-api.nvim_set_keymap("n", "<Leader>fh", [[<Cmd>Telescope harpoon marks<CR>]], { noremap = true, silent = true })
-api.nvim_set_keymap("n", "<Leader>fb", [[<Cmd>lua require('telescope.builtin').git_branches()<CR>]],
+vim.keymap.set("n", "<Leader>fh", [[<Cmd>Telescope harpoon marks<CR>]], { noremap = true, silent = true })
+vim.keymap.set("n", "<Leader>fb", [[<Cmd>lua require('telescope.builtin').git_branches()<CR>]],
   { noremap = true, silent = true })
 
 -- Harpoon
-api.nvim_set_keymap(
+vim.keymap.set(
   "n",
   "<Leader>ha",
   [[<Cmd>lua require('harpoon.mark').add_file()<CR>]],
   { noremap = true, silent = true }
 )
-api.nvim_set_keymap(
+vim.keymap.set(
   "n",
   "<Leader>hm",
   [[<Cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>]],
   { noremap = true, silent = true }
 )
-api.nvim_set_keymap(
+vim.keymap.set(
   "n",
   "<Leader>1",
   [[<Cmd>lua require('harpoon.ui').nav_file(1)<CR>]],
   { noremap = true, silent = true }
 )
-api.nvim_set_keymap(
+vim.keymap.set(
   "n",
   "<Leader>1",
   [[<Cmd>lua require('harpoon.ui').nav_file(1)<CR>]],
   { noremap = true, silent = true }
 )
-api.nvim_set_keymap(
+vim.keymap.set(
   "n",
   "<Leader>2",
   [[<Cmd>lua require('harpoon.ui').nav_file(2)<CR>]],
   { noremap = true, silent = true }
 )
-api.nvim_set_keymap(
+vim.keymap.set(
   "n",
   "<Leader>3",
   [[<Cmd>lua require('harpoon.ui').nav_file(3)<CR>]],
   { noremap = true, silent = true }
 )
-api.nvim_set_keymap(
+vim.keymap.set(
   "n",
   "<Leader>4",
   [[<Cmd>lua require('harpoon.ui').nav_file(4)<CR>]],
@@ -110,32 +111,30 @@ api.nvim_set_keymap(
 )
 -- -- Custom plugins
 -- Trouble
-api.nvim_set_keymap("n", "<leader>xx", "<cmd>TroubleToggle<CR>", { noremap = true, silent = true })
-api.nvim_set_keymap(
+vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<CR>", { noremap = true, silent = true })
+vim.keymap.set(
   "n",
   "<leader>xw",
   "<cmd>TroubleToggle workspace_diagnostics<CR>",
   { noremap = true, silent = true }
 )
-api.nvim_set_keymap("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<CR>", { noremap = true, silent = true })
-api.nvim_set_keymap("n", "<leader>xl", "<cmd>TroubleToggle loclist<CR>", { noremap = true, silent = true })
-api.nvim_set_keymap("n", "<leader>xq", "<cmd>TroubleToggle quickfix<CR>", { noremap = true, silent = true })
-api.nvim_set_keymap("n", "gR", "<cmd>TroubleToggle lsp_references<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "gr", "<cmd>TroubleToggle lsp_references<CR>", { noremap = true, silent = true })
 -- Git
-api.nvim_set_keymap("n", "<leader>gg", "<cmd>Neogit<CR>", { noremap = true, silent = true })
--- Alias
+vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<CR>", { noremap = true, silent = true })
 
 
 -- luasnip
-api.nvim_set_keymap("i", "<C-E>", "<Plug>luasnip-next-choice", {})
-api.nvim_set_keymap("s", "<C-E>", "<Plug>luasnip-next-choice", {})
-api.nvim_set_keymap("s", "<C-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", {})
-api.nvim_set_keymap("i", "<C-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", {})
-api.nvim_set_keymap("s", "<C-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", {})
-api.nvim_set_keymap("i", "<C-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", {})
+vim.keymap.set("i", "<C-E>", "<Plug>luasnip-next-choice", {})
+vim.keymap.set("s", "<C-E>", "<Plug>luasnip-next-choice", {})
+vim.keymap.set("s", "<C-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", {})
+vim.keymap.set("i", "<C-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", {})
+vim.keymap.set("s", "<C-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", {})
+vim.keymap.set("i", "<C-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", {})
 
 -- Move stuff
--- vim.keymap.set("n", "<Leader>fs", ":LspZeroFormat<CR>")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
 vim.keymap.set("x", "<leader>p", [["_dP]])
