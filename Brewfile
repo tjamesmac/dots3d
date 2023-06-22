@@ -21,6 +21,7 @@ brew "skhd"
 brew "hyperfine"
 brew "ffmpeg"
 brew "yabai"
+brew "zoxide"
 
 cask "spotify"
 cask "rectangle"

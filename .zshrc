@@ -29,6 +29,7 @@ source ~/.zsh/jovial.zsh-theme
 source ~/.zsh/aliases.zsh
 source ~/.zsh/options.zsh
 # source ~/.zsh/env.zsh
+eval "$(zoxide init zsh)"
 
 antidote load
 

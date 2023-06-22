@@ -1,5 +1,4 @@
 jeffreytse/zsh-vi-mode
-agkozak/zsh-z
 
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-history-substring-search
