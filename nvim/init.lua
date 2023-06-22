@@ -151,7 +151,7 @@ require("lazy").setup({
         require("telescope").load_extension("live_grep_args")
         require("telescope").load_extension("fzf")
       end,
-      version = false,
+      tag = '0.1.1',
       dependencies = {
         { "nvim-lua/plenary.nvim" },
         { "nvim-telescope/telescope-live-grep-args.nvim" },
