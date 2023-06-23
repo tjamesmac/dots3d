@@ -1,3 +1,7 @@
+if not pcall(require, "luasnip") then
+  return
+end
+
 if vim.g.vscode then
   -- VSCode extension
 else
