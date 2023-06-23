@@ -158,8 +158,8 @@ vim.keymap.set("n", "<leader>qs", [[<cmd>lua require("persistence").load()<cr>]]
 -- stop Persistence => session won't be saved on exit
 vim.keymap.set("n", "<leader>qd", [[<cmd>lua require("persistence").stop()<cr>]])
 
--- Oil 
-vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" })
+-- Oil
+vim.keymap.set("n", "-", vim.cmd.Oil, { desc = "Open parent directory" })
 
 -- disable command history
-vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" })
+-- vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" })

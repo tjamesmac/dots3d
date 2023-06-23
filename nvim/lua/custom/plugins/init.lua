@@ -1,5 +1,4 @@
 return {
-
   { "nvim-lua/plenary.nvim" },
   { "tpope/vim-surround" },
   { "mbbill/undotree" },
@@ -7,6 +6,7 @@ return {
   { "norcalli/nvim-colorizer.lua" },
   { "ray-x/go.nvim" },
   { "ThePrimeagen/harpoon",       dependencies = "nvim-lua/plenary.nvim" },
+  { "stevearc/dressing.nvim" },
   {
     "windwp/nvim-autopairs",
     opts = {}

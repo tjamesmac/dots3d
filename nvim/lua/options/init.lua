@@ -32,7 +32,7 @@ vim.opt.shiftwidth = 2
 -- Gutter
 vim.opt.number = true -- displays line numbers
 vim.opt.relativenumber = true
-vim.opt.signcolumn = "number"
+vim.opt.signcolumn = "yes"
 vim.opt.laststatus = 3
 vim.o.breakindent = true
 vim.o.termguicolors = true
