@@ -4,6 +4,9 @@ return {
     opts = {
       templates = {
         "builtin", "user.test"
+      },
+      task_list = {
+        direction = 'right'
       }
     },
   }
