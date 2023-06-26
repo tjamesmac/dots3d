@@ -1,4 +1,3 @@
--- @todo Make sure we get the extra statusline types
 if not pcall(require, "heirline") then
   return
 end
@@ -7,8 +6,7 @@ local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
 
 local background = 'bright_bg'
--- @todo make this darker
-local Vi_surround_bg = 'dark_gray'
+local Vi_surround_bg = 'white'
 
 -- @todo get better err, warn, info, hint icons
 local icons = {
@@ -26,25 +24,26 @@ local icons = {
 
 local function setup_colors()
   return {
-  bright_bg = utils.get_highlight("Folded").bg,
-  bright_fg = utils.get_highlight("Folded").fg,
-  red = utils.get_highlight("DiagnosticError").fg,
-  dark_red = utils.get_highlight("DiffDelete").bg,
-  green = utils.get_highlight("String").fg,
-  blue = utils.get_highlight("Function").fg,
-  gray = utils.get_highlight("NonText").fg,
-  dark_gray = utils.get_highlight("Comment").fg,
-  orange = utils.get_highlight("Constant").fg,
-  purple = utils.get_highlight("Statement").fg,
-  cyan = utils.get_highlight("Special").fg,
-  diag_warn = utils.get_highlight("DiagnosticWarn").fg,
-  diag_error = utils.get_highlight("DiagnosticError").fg,
-  diag_hint = utils.get_highlight("DiagnosticHint").fg,
-  diag_info = utils.get_highlight("DiagnosticInfo").fg,
-  git_del = utils.get_highlight("DiffDelete").fg,
-  git_add = utils.get_highlight("DiffAdd").fg,
-  git_change = utils.get_highlight("DiffChange").fg,
-}
+    bright_bg = utils.get_highlight("Folded").bg,
+    bright_fg = utils.get_highlight("Folded").fg,
+    red = utils.get_highlight("DiagnosticError").fg,
+    dark_red = utils.get_highlight("DiffDelete").bg,
+    green = utils.get_highlight("String").fg,
+    blue = utils.get_highlight("Function").fg,
+    gray = utils.get_highlight("NonText").fg,
+    dark_gray = utils.get_highlight("CursorLine").bg,
+    white = "white",
+    orange = utils.get_highlight("Constant").fg,
+    purple = utils.get_highlight("Statement").fg,
+    cyan = utils.get_highlight("Special").fg,
+    diag_warn = utils.get_highlight("DiagnosticWarn").fg,
+    diag_error = utils.get_highlight("DiagnosticError").fg,
+    diag_hint = utils.get_highlight("DiagnosticHint").fg,
+    diag_info = utils.get_highlight("DiagnosticInfo").fg,
+    git_del = utils.get_highlight("DiffDelete").fg,
+    git_add = utils.get_highlight("DiffAdd").fg,
+    git_change = utils.get_highlight("DiffChange").fg,
+  }
 end
 
 
@@ -107,6 +106,7 @@ local ViMode = {
 }
 
 
+-- Workaround for surround blocks needing to have bg coloured with statusline
 local Vi = {
   {
     provider = "",
@@ -164,19 +164,13 @@ local FileIcon = {
 
 local FileName = {
   provider = function(self)
-    -- first, trim the pattern relative to the current directory. For other
-    -- options, see :h filename-modifers
     local filename = vim.fn.fnamemodify(self.filename, ":.")
     if filename == "" then return "[No Name]" end
-    -- now, if the filename would occupy more than 1/4th of the available
-    -- space, we trim the file path to its initials
-    -- See Flexible Components section below for dynamic truncation
     if not conditions.width_percent_below(#filename, 0.25) then
       filename = vim.fn.pathshorten(filename)
     end
     return filename
   end,
-  -- hl = { fg = utils.get_highlight("Directory").fg, bg = background },
   hl = { fg = 'white', bg = background },
 }
 
@@ -211,7 +205,6 @@ local FileNameModifer = {
   end,
 }
 
--- let's add the children to our FileNameBlock component
 FileNameBlock = utils.insert(FileNameBlock,
   FileIcon,
   Space,
@@ -224,10 +217,6 @@ FileNameBlock = utils.insert(FileNameBlock,
 local LSPActive = {
   condition = conditions.lsp_attached,
   update    = { 'LspAttach', 'LspDetach' },
-  -- You can keep it simple,
-  -- provider = icons.lsp .. " [LSP]",
-
-  -- Or complicate things a bit and get the servers names
   provider  = function()
     local names = {}
     for i, server in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
@@ -255,7 +244,7 @@ local Diagnostics = {
   update = { "DiagnosticChanged", "BufEnter" },
   {
     provider = "![",
-    hl = { bg = "bright_bg" }
+    hl = { fg = "bright_fg", bg = "bright_bg" }
   },
   {
     provider = function(self)
@@ -284,7 +273,7 @@ local Diagnostics = {
   },
   {
     provider = "]",
-    hl = { bg = "bright_bg" }
+    hl = { fg = "bright_fg", bg = "bright_bg" }
   },
 }
 
@@ -292,15 +281,65 @@ local DefaultStatusline = {
   Vi,
   Space,
   Space,
-  FileNameBlock,
-  Space,
-  Space,
   Git,
   Space,
+  Space,
+  FileNameBlock,
   Align,
   Diagnostics,
   Align,
   LSPActive,
+}
+
+local FileType = {
+  provider = function()
+    return string.upper(vim.bo.filetype)
+  end,
+  hl = { fg = utils.get_highlight("type").fg, bg = background, bold = true },
+}
+
+local SpecialStatusline = {
+  condition = function()
+    return conditions.buffer_matches({
+      buftype = { "nofile", "prompt", "help", "quickfix" },
+      filetype = { "^git.*", "fugitive" },
+    })
+  end,
+  FileType,
+  Align
+}
+
+local TerminalStatusline = {
+  condition = function()
+    return conditions.buffer_matches({ buftype = { "terminal" } })
+  end,
+  hl = { bg = "dark_red" },
+  -- Quickly add a condition to the ViMode to only show it when buffer is active!
+  { condition = conditions.is_active, ViMode, Space },
+  FileType,
+  Space,
+  Align,
+}
+
+local InactiveStatusline = {
+  condition = conditions.is_not_active,
+  FileType,
+  Space,
+  FileName,
+  Align,
+}
+
+local GitStatusline = {
+  condition = function()
+    return conditions.buffer_matches({
+      buftype = { "nofile" },
+      filetype = { "^git.*", "NeogitPopup" },
+    })
+  end,
+  -- Vi, -- weird issue where there's an underline going through the whole thing
+  Space,
+  Align,
+  FileType,
   Align,
 }
 
@@ -315,7 +354,7 @@ local StatusLines = {
   static = {
     mode_colors = {
       n = "red",
-      i = "green",
+      i = "blue",
       v = "cyan",
       V = "cyan",
       ["\22"] = "cyan", -- this is an actual ^V, type <C-v><C-v> in insert mode
@@ -334,31 +373,17 @@ local StatusLines = {
     end,
   },
   fallthrough = false,
-  -- GitStatusline,
-  -- SpecialStatusline,
-  -- TerminalStatusline,
-  -- InactiveStatusline,
+  GitStatusline,
+  SpecialStatusline,
+  TerminalStatusline,
+  InactiveStatusline,
   DefaultStatusline,
 }
 
 
 require('heirline').setup({
   statusline = StatusLines,
-  -- winbar = WinBar,
-  -- tabline = TabLine,
-  -- statuscolumn = Stc,
-  -- opts = {
-  --   disable_winbar_cb = function(args)
-  --     if vim.bo[args.buf].filetype == "neo-tree" then
-  --       return
-  --     end
-  --     return conditions.buffer_matches({
-  --       buftype = { "nofile", "prompt", "help", "quickfix" },
-  --       filetype = { "^git.*", "fugitive", "Trouble", "dashboard" },
-  --     }, args.buf)
-  --   end,
   colors = setup_colors,
-  -- },
 })
 
 vim.api.nvim_create_augroup("Heirline", { clear = true })

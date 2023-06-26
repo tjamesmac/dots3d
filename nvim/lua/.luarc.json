@@ -1,0 +1,32 @@
+{
+    "workspace.library": [
+        "/Users/tjamc/.config/nvim",
+        "/Users/tjamc/.local/share/nvim/site",
+        "/Users/tjamc/.local/share/nvim/lazy/lazy.nvim",
+        "/Users/tjamc/.local/share/nvim/lazy/cmp-nvim-lsp",
+        "/Users/tjamc/.local/share/nvim/lazy/mason-lspconfig.nvim",
+        "/Users/tjamc/.local/share/nvim/lazy/mason.nvim",
+        "/Users/tjamc/.local/share/nvim/lazy/nvim-lspconfig",
+        "/Users/tjamc/.local/share/nvim/lazy/lsp-zero.nvim",
+        "/Users/tjamc/.local/share/nvim/lazy/telescope-fzf-native.nvim",
+        "/Users/tjamc/.local/share/nvim/lazy/go.nvim",
+        "/Users/tjamc/.local/share/nvim/lazy/Comment.nvim",
+        "/Users/tjamc/.local/share/nvim/lazy/nvim-treesitter",
+        "/Users/tjamc/.local/share/nvim/lazy/nvim-ts-context-commentstring",
+        "/Users/tjamc/.local/share/nvim/lazy/Navigator.nvim",
+        "/Users/tjamc/.local/share/nvim/lazy/gitsigns.nvim",
+        "/Users/tjamc/.local/share/nvim/lazy/nvim-colorizer.lua",
+        "/opt/homebrew/Cellar/neovim/HEAD-d549734/share/nvim/runtime",
+        "/Users/tjamc/.local/share/nvim/lazy/cmp-nvim-lsp/after",
+        "/Users/tjamc/.local/share/nvim/lazy/go.nvim/after",
+        "/Users/tjamc/.config/nvim/after",
+        "/Users/tjamc/.local/state/nvim/lazy/readme",
+        "${3rd}/luassert/library",
+        "${3rd}/luv/library",
+        "${3rd}/lfs/library"
+    ],
+    "diagnostics.globals": [
+        "vim",
+        "lfs"
+    ]
+}
