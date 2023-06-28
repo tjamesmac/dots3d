@@ -21,6 +21,7 @@ brew "ripgrep"
 brew "hyperfine"
 brew "ffmpeg"
 brew "zoxide"
+brew "tmuxinator"
 
 cask "spotify"
 cask "rectangle"
@@ -31,8 +32,8 @@ cask "visual-studio-code"
 cask "amethyst"
 
 cask "rectangle"
+
 # Fonts
-cask "font-iosevka"
 cask "font-lilex-nerd-font"
 cask "font-iosevka-nerd-font"
 cask "font-hack-nerd-font"
