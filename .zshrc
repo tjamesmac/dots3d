@@ -1,37 +1,44 @@
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-export PATH=$PATH:$HOME/.toolbox/bin
-export PATH="$N_PREFIX/bin:$PATH"
-export PATH=~/.emacs.d/bin:$PATH
-# need this for M1
-# eval "$(/opt/homebrew/bin/brew shellenv)"
+# Used for debugging startup
+# zmodload zsh/zprof
+#
 
-# abcd() {
-#   cd $(~/go/bin/abcd)
-# }
+# m1 macbook check
+if [[ $(uname -m) == 'arm64' ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
-# Go stuff
-export GOPATH=$HOME/go
-export GOROOT=/usr/local/go
-export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOPATH
-export PATH=$PATH:$GOROOT/bin
-export GOPROXY=direct
-
-# source ${ZDOTDIR:-~}/.antidote/antidote.zsh
-# this is the homebrew installation
 source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
-
-gswc () {
-  git branch | gum filter | xargs git switch
-}
-
 source ~/.zsh/jovial.zsh-theme
 source ~/.zsh/aliases.zsh
 source ~/.zsh/options.zsh
+source ~/.zsh/var.zsh # contains lazy load nvm
+source ~/.zsh/func.zsh
 # source ~/.zsh/env.zsh
 eval "$(zoxide init zsh)"
+eval "$(direnv hook zsh)"
 
-antidote load
+# antidote load
+
+# Set the name of the static .zsh plugins file antidote will generate.
+zsh_plugins=${ZDOTDIR:-~}/.zsh_plugins.zsh
+
+# Ensure you have a .zsh_plugins.txt file where you can add plugins.
+[[ -f ${zsh_plugins:r}.txt ]] || touch ${zsh_plugins:r}.txt
+
+# Lazy-load antidote.
+fpath+=(${ZDOTDIR:-~}/.antidote)
+autoload -Uz $fpath[-1]/antidote
+
+# Generate static file in a subshell when .zsh_plugins.txt is updated.
+if [[ ! $zsh_plugins -nt ${zsh_plugins:r}.txt ]]; then
+  (antidote bundle <${zsh_plugins:r}.txt >|$zsh_plugins)
+fi
+# Source your static plugins file.
+source $zsh_plugins
 
 
 
+
+
+# Used for debugging startup
+# zprof

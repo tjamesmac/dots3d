@@ -1,6 +1,7 @@
 tap "homebrew/cask"
 
 tap "charmbracelet/tap"
+tap "homebrew/cask-fonts"
 
 brew "fzf"
 brew "tmux"
@@ -17,10 +18,8 @@ brew "slides"
 brew "glow"
 brew "gum"
 brew "ripgrep"
-brew "skhd"
 brew "hyperfine"
 brew "ffmpeg"
-brew "yabai"
 brew "zoxide"
 
 cask "spotify"

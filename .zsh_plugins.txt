@@ -9,4 +9,4 @@ zsh-users/zsh-completions
 cdimascio/lambda-zsh-theme    kind:fpath
 sindresorhus/pure             kind:fpath
 
-zsh-users/zsh-syntax-highlighting
+zdharma-continuum/fast-syntax-highlighting kind:defer
