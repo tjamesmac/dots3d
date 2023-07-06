@@ -1,8 +1,12 @@
 return {
-  { "neovim/nvim-lspconfig" },
+  {
+    "neovim/nvim-lspconfig",
+    event = 'VeryLazy'
+  },
 
   {
     'VonHeikemen/lsp-zero.nvim',
+    event = "VeryLazy",
     config = function()
       local lsp = require('lsp-zero')
 
@@ -132,5 +136,6 @@ return {
     "pmizio/typescript-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     opts = {},
+    event = "VeryLazy"
   }
 }

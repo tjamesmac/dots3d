@@ -1,42 +1,46 @@
 return {
   { "nvim-lua/plenary.nvim" },
-  { "tpope/vim-surround" },
   { "mbbill/undotree" },
   { "MunifTanjim/prettier.nvim" },
   { "norcalli/nvim-colorizer.lua" },
-  { "ray-x/go.nvim" },
   { "ThePrimeagen/harpoon",       dependencies = "nvim-lua/plenary.nvim" },
-  { "stevearc/dressing.nvim" },
+  {
+    "stevearc/dressing.nvim",
+    -- event = "BufReadPre",
+  },
   {
     "windwp/nvim-autopairs",
     opts = {}
   },
   {
-    "TimUntersberger/neogit",
+    "NeogitOrg/neogit",
     opts = {
       disable_commit_confirmation = true,
       disable_insert_on_commit = false,
     },
-    dependencies = "nvim-lua/plenary.nvim"
+    dependencies = "nvim-lua/plenary.nvim",
+    event = "VeryLazy"
   },
   {
     "folke/trouble.nvim",
     dependencies = "nvim-tree/nvim-web-devicons",
     opts = {
       position = 'right'
-    }
+    },
+    event = 'VeryLazy'
   },
   {
     -- move between tmux and nvim easily
     "numToStr/Navigator.nvim",
     config = function()
       require('Navigator').setup()
-    end
+    end,
+    event = 'VeryLazy'
   },
   {
     "folke/persistence.nvim",
+    opts = {},
     event = "BufReadPre", -- this will only start session saving when an actual file was opened
-    opts = {}
   },
   {
     'stevearc/oil.nvim',
@@ -44,5 +48,13 @@ return {
     -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
-  { 'lewis6991/gitsigns.nvim' },
+  {
+    'lewis6991/gitsigns.nvim',
+    event = 'VeryLazy'
+  },
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    opts = {}
+  }
 }

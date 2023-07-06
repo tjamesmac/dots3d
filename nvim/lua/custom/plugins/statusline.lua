@@ -1,4 +1,4 @@
 return {
-  "rebelot/heirline.nvim",
-  event = "VeryLazy",
+  -- "rebelot/heirline.nvim",
+  -- event = "VeryLazy",
 }

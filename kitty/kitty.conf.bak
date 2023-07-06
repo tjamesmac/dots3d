@@ -2235,6 +2235,6 @@ term xterm-256color
 
 
 # BEGIN_KITTY_THEME
-# Doom Vibrant
+# GitHub Dark High Contrast
 include current-theme.conf
 # END_KITTY_THEME
