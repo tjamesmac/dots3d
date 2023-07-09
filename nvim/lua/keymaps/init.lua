@@ -26,8 +26,8 @@ vim.keymap.set(
 
 vim.keymap.set("n", "<leader>s", function()
   if vim.bo.filetype ~= 'go' and vim.bo.filetype ~= 'lua' and vim.bo.filetype ~= 'rust' then
-    print('Prettier')
-    return vim.cmd.Prettier()
+    print('EslintFixAll')
+    return vim.cmd.EslintFixAll()
   else
     print('LspZeroFormat')
     return vim.cmd.LspZeroFormat()

@@ -1,4 +1,5 @@
 return {
+
   { "nvim-lua/plenary.nvim" },
   { "mbbill/undotree" },
   { "MunifTanjim/prettier.nvim" },
@@ -6,7 +7,7 @@ return {
   { "ThePrimeagen/harpoon",       dependencies = "nvim-lua/plenary.nvim" },
   {
     "stevearc/dressing.nvim",
-    -- event = "BufReadPre",
+    event = "BufReadPre",
   },
   {
     "windwp/nvim-autopairs",
@@ -47,14 +48,16 @@ return {
     opts = {},
     -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    event = 'VeryLazy'
   },
   {
     'lewis6991/gitsigns.nvim',
     event = 'VeryLazy'
   },
+
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    opts = {}
+    opts = {},
   }
 }

@@ -30,8 +30,10 @@ return {
       { "nvim-lua/plenary.nvim" },
       { "nvim-telescope/telescope-live-grep-args.nvim" },
       { "ThePrimeagen/harpoon",                        dependencies = "nvim-lua/plenary.nvim" },
-    }
+    },
+    event = 'VeryLazy'
   },
-
-  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+  {
+    'nvim-telescope/telescope-fzf-native.nvim', build = 'make', event = 'VeryLazy'
+  },
 }

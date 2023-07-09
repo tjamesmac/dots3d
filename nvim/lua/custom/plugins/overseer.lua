@@ -9,5 +9,6 @@ return {
         direction = 'right'
       }
     },
+    event = 'VeryLazy'
   }
 }
