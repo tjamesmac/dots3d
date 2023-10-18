@@ -1,17 +1,29 @@
 return {
 
   { "nvim-lua/plenary.nvim" },
-  { "mbbill/undotree" },
-  { "MunifTanjim/prettier.nvim" },
-  { "norcalli/nvim-colorizer.lua" },
-  { "ThePrimeagen/harpoon",       dependencies = "nvim-lua/plenary.nvim" },
+  { "mbbill/undotree",            cmd = 'UndotreeToggle' },
+  { "sbdchd/neoformat",           cmd = "Neoformat" },
+  { "ThePrimeagen/harpoon",       dependencies = "nvim-lua/plenary.nvim", keys = { { '<leader>ha' }, { '<leader>ha' } } },
+  { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' },
   {
     "stevearc/dressing.nvim",
-    event = "BufReadPre",
+    -- lazy = true,
+    event = "BufReadPost",
+  },
+  {
+    'stevearc/conform.nvim',
+    opts = {},
+    config = function()
+      require('conform').setup({
+        javascript = { { "prettierd", "prettier" } }
+      })
+    end,
   },
   {
     "windwp/nvim-autopairs",
-    opts = {}
+    opts = {},
+    -- lazy = true,
+    event = "BufReadPost",
   },
   {
     "NeogitOrg/neogit",
@@ -20,15 +32,14 @@ return {
       disable_insert_on_commit = false,
     },
     dependencies = "nvim-lua/plenary.nvim",
-    event = "VeryLazy"
+    -- lazy = true,
+    cmd = 'Neogit'
   },
   {
     "folke/trouble.nvim",
     dependencies = "nvim-tree/nvim-web-devicons",
-    opts = {
-      position = 'right'
-    },
-    event = 'VeryLazy'
+    opts = {},
+    cmd = 'TroubleToggle'
   },
   {
     -- move between tmux and nvim easily
@@ -36,28 +47,33 @@ return {
     config = function()
       require('Navigator').setup()
     end,
-    event = 'VeryLazy'
-  },
-  {
-    "folke/persistence.nvim",
-    opts = {},
-    event = "BufReadPre", -- this will only start session saving when an actual file was opened
+    keys = {
+      { "<C-j>" },
+      { "<C-k>" },
+      { "<C-h>" },
+      { "<C-l>" },
+    }
   },
   {
     'stevearc/oil.nvim',
-    opts = {},
-    -- Optional dependencies
+    opts = {
+      view_options = {
+        show_hidden = true
+      }
+    },
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    event = 'VeryLazy'
+    cmd = 'Oil'
   },
   {
     'lewis6991/gitsigns.nvim',
-    event = 'VeryLazy'
+    -- lazy = true,
+    cmd = 'Gitsigns'
   },
 
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {},
+    event = "BufReadPost"
   }
 }

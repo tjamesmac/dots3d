@@ -1,13 +1,8 @@
 return {
-
-  {
-    "neovim/nvim-lspconfig",
-    event = 'VeryLazy'
-  },
-
   {
     'VonHeikemen/lsp-zero.nvim',
-    event = "VeryLazy",
+    -- lazy = true,
+    event = 'BufReadPre',
     config = function()
       local lsp = require('lsp-zero')
 
@@ -36,10 +31,12 @@ return {
         'lua_ls',
         'rust_analyzer',
         'denols',
-        'tailwindcss'
+        'tailwindcss',
+        'tsserver',
+        'astro'
       })
 
-      lsp.skip_server_setup({ 'tsserver', 'denols' })
+      lsp.skip_server_setup({ 'eslint' })
 
       local on_attach = function(client, bufnr)
         local function buf_set_keymap(...)
@@ -64,6 +61,7 @@ return {
         buf_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
         buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
         if client.name ~= "tsserver" and client.name ~= "cssls" and client.name ~= 'rust_analyzer' then
+          print(client.name)
           vim.keymap.set("n", "<leader>s", function()
             local params = vim.lsp.util.make_formatting_params({})
             client.request("textDocument/formatting", params, nil, bufnr)
@@ -121,10 +119,9 @@ return {
         on_attach = on_attach,
       })
 
-      -- TODO: one day
-      -- lsp.configure('cssmodules_ls', {
-      --   on_attach = on_attach
-      -- })
+      lsp.configure('astro', {
+        on_attach = on_attach,
+      })
 
       lsp.setup()
     end,
@@ -135,45 +132,8 @@ return {
       { 'williamboman/mason-lspconfig.nvim' },
     }
   },
-
   {
-    "pmizio/typescript-tools.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    opts = {
-      on_attach = function(client, bufnr)
-        local function buf_set_keymap(...)
-          vim.api.nvim_buf_set_keymap(bufnr, ...)
-        end
-
-        -- Mappings.
-        local opts = { noremap = true, silent = true }
-
-        buf_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-        buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-        buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-        buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-        buf_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-        buf_set_keymap("n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
-        buf_set_keymap("n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
-        buf_set_keymap("n", "<leader>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-        buf_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-        buf_set_keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-        buf_set_keymap("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-        -- buf_set_keymap("n", "gr", "TroubleToggle lsp_references<CR>", opts)
-        buf_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
-        buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-
-        client.server_capabilities.documentFormattingProvider = false
-        client.server_capabilities.documentRangeFormattingProvider = false
-        -- if client.name ~= "tsserver" and client.name ~= "cssls" and client.name ~= 'rust_analyzer' then
-        --   vim.keymap.set("n", "<leader>s", function()
-        --     local params = vim.lsp.util.make_formatting_params({})
-        --     client.request("textDocument/formatting", params, nil, bufnr)
-        --   end, { buffer = bufnr })
-        -- end
-      end
-
-    },
-    event = "VeryLazy"
-  }
+    "neovim/nvim-lspconfig",
+    event = { 'BufReadPre', 'BufNewFile' },
+  },
 }

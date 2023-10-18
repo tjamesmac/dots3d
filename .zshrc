@@ -8,15 +8,21 @@ if [[ $(uname -m) == 'arm64' ]]; then
 fi
 
 source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
-source ~/.zsh/jovial.zsh-theme
 source ~/.zsh/aliases.zsh
 source ~/.zsh/options.zsh
 source ~/.zsh/var.zsh # contains lazy load nvm
+
+export N_PREFIX=$HOME/.n
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+export PATH=$PATH:$HOME/.toolbox/bin
+export PATH="$N_PREFIX/bin:$PATH"
+export PATH=~/.emacs.d/bin:$PATH
+export PATH="$HOME/.emacs.d/bin:$PATH"
 source ~/.zsh/func.zsh
-# source ~/.zsh/env.zsh
+
 eval "$(zoxide init zsh)"
 eval "$(direnv hook zsh)"
-
+eval "$(starship init zsh)"
 # antidote load
 
 # Set the name of the static .zsh plugins file antidote will generate.

@@ -18,7 +18,8 @@ require("nvim-treesitter.configs").setup({
     "markdown",
     "markdown_inline",
     "regex",
-    "vim"
+    "vim",
+    "astro"
   },
   highlight = {
     enable = true,
