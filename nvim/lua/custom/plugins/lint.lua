@@ -18,6 +18,7 @@ return {
       javascriptreact = { "eslint_d" },
       lua = { "luacheck" },
       typescript = { "eslint_d" },
+      -- typescript = { "deno" },
       ["typescript.tsx"] = { "eslint_d" },
       typescriptreact = { "eslint_d" },
       yaml = { "yamllint" },
@@ -29,6 +30,14 @@ return {
     lint.linters_by_ft = opts.linters_by_ft
     for k, v in pairs(opts.linters) do
       lint.linters[k] = v
+      local test = vim.fs.dirname(vim.fs.find({ 'deno.json' }, { upward = true })[1])
+      -- if test ~= nil and k == 'typescript' then
+      if k == 'typescript' then
+        print('found deno.json')
+        lint.linters[k] = { 'deno' }
+      else
+        print('no deno.json')
+      end
     end
     local timer = assert(uv.new_timer())
     local DEBOUNCE_MS = 500
@@ -51,6 +60,10 @@ return {
         )
       end,
     })
-    lint.try_lint(nil, { ignore_errors = true })
+
+    local deno_project = vim.fs.dirname(vim.fs.find({ 'deno.json' }, { upward = true })[1])
+    if deno_project ~= nil then
+      lint.try_lint('deno')
+    end
   end,
 }

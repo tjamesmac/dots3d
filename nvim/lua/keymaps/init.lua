@@ -125,12 +125,12 @@ vim.keymap.set("n", "<leader>g", "<cmd>Neogit<CR>", { noremap = true, silent = t
 
 
 -- luasnip
--- vim.keymap.set("i", "<C-E>", "<Plug>luasnip-next-choice", {})
--- vim.keymap.set("s", "<C-E>", "<Plug>luasnip-next-choice", {})
--- vim.keymap.set("s", "<C-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", {})
--- vim.keymap.set("i", "<C-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", {})
--- vim.keymap.set("s", "<C-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", {})
--- vim.keymap.set("i", "<C-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", {})
+vim.keymap.set("i", "<C-E>", "<Plug>luasnip-next-choice", {})
+vim.keymap.set("s", "<C-E>", "<Plug>luasnip-next-choice", {})
+vim.keymap.set("s", "<C-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", {})
+vim.keymap.set("i", "<C-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", {})
+vim.keymap.set("s", "<C-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", {})
+vim.keymap.set("i", "<C-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", {})
 
 -- Move stuff
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
@@ -252,3 +252,6 @@ end, { desc = "Format files" })
 --     end
 --   end
 -- end
+
+vim.g.copilot_no_tab_map = true
+vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })

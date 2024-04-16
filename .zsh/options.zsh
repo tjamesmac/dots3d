@@ -7,8 +7,8 @@ HISTFILE=~/.zsh/.zsh_history
 HISTSIZE=500000
 SAVEHIST=500000
 setopt appendhistory
-setopt INC_APPEND_HISTORY
-setopt SHARE_HISTORY
+setopt inc_append_history
+setopt share_history
 
 # bindkey '^[ ' autosuggest-execute
 bindkey '^[[A' history-substring-search-up

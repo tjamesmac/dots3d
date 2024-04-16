@@ -4,30 +4,30 @@ end
 
 require("nvim-treesitter.configs").setup({
   ensure_installed = {
+    "astro",
     "bash",
     "css",
+    "go",
     "html",
     "javascript",
     "json",
-    "rust",
-    "tsx",
-    "typescript",
-    "yaml",
     "lua",
-    "go",
     "markdown",
     "markdown_inline",
+    "prisma",
     "regex",
+    "rust",
+    "svelte",
+    "terraform",
+    "tsx",
+    "typescript",
     "vim",
-    "astro"
+    "yaml",
+    "zig"
   },
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
-  },
-  context_commentstring = {
-    enable = true,
-    enable_autocmd = false,
   },
   sync_install = false,
   incremental_selection = {

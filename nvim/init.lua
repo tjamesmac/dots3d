@@ -3,18 +3,6 @@ vim.g.globalstatus = true
 
 require("options")
 
-if vim.g.neovide then
-  vim.keymap.set(
-    "n",
-    "<D-v>",
-    '"+p',
-    { noremap = true, silent = true }
-  )
-
-  vim.opt.guifont = { "Hack Nerd Font", ":h18" }
-  -- vim.g.neovide_cursor_animation_length = 0
-end
-
 if vim.g.vscode then
   vim.keymap.set("i", "jk", "<ESC>", { noremap = true, silent = true })
   vim.keymap.set("i", "kj", "<ESC>", { noremap = true, silent = true })

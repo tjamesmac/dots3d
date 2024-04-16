@@ -11,9 +11,7 @@ alias gps="git push"
 alias gl="git log --pretty=format:'%C(Yellow)%h%Cgreen%d%Cblue %cl%Creset %s'"
 
 
-alias ls="exa --oneline --all"
-
-alias gamma="ssh $MYHOST"
+alias ls="exa --all"
 
 alias gb="git branch --sort=-committerdate | gum filter | xargs git switch"
 
@@ -25,3 +23,6 @@ alias s="npm run server"
 alias sw="npm run server:watch"
 alias ww="npm run webpack-watch"
 alias lg="lazygit"
+
+# glab
+alias gvw="glab mr view --web"

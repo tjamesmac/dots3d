@@ -1,46 +1,42 @@
 return {
 
   { "nvim-lua/plenary.nvim" },
-  { "mbbill/undotree",            cmd = 'UndotreeToggle' },
-  { "sbdchd/neoformat",           cmd = "Neoformat" },
-  { "ThePrimeagen/harpoon",       dependencies = "nvim-lua/plenary.nvim", keys = { { '<leader>ha' }, { '<leader>ha' } } },
-  { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' },
+  { "ThePrimeagen/harpoon", dependencies = "nvim-lua/plenary.nvim", keys = { { '<leader>ha' }, { '<leader>ha' } } },
   {
     "stevearc/dressing.nvim",
-    -- lazy = true,
     event = "BufReadPost",
   },
-  {
-    'stevearc/conform.nvim',
-    opts = {},
-    config = function()
-      require('conform').setup({
-        javascript = { { "prettierd", "prettier" } }
-      })
-    end,
-  },
+  -- {
+  --   'stevearc/conform.nvim',
+  --   opts = {},
+  --   config = function()
+  --     require('conform').setup({
+  --       javascript = { { "prettierd", "prettier" } }
+  --     })
+  --   end,
+  -- },
   {
     "windwp/nvim-autopairs",
     opts = {},
     -- lazy = true,
     event = "BufReadPost",
   },
-  {
-    "NeogitOrg/neogit",
-    opts = {
-      disable_commit_confirmation = true,
-      disable_insert_on_commit = false,
-    },
-    dependencies = "nvim-lua/plenary.nvim",
-    -- lazy = true,
-    cmd = 'Neogit'
-  },
-  {
-    "folke/trouble.nvim",
-    dependencies = "nvim-tree/nvim-web-devicons",
-    opts = {},
-    cmd = 'TroubleToggle'
-  },
+  -- {
+  --   "NeogitOrg/neogit",
+  --   opts = {
+  --     disable_commit_confirmation = true,
+  --     disable_insert_on_commit = false,
+  --   },
+  --   dependencies = "nvim-lua/plenary.nvim",
+  --   -- lazy = true,
+  --   cmd = 'Neogit'
+  -- },
+  -- {
+  --   "folke/trouble.nvim",
+  --   dependencies = "nvim-tree/nvim-web-devicons",
+  --   opts = {},
+  --   cmd = 'TroubleToggle'
+  -- },
   {
     -- move between tmux and nvim easily
     "numToStr/Navigator.nvim",
@@ -64,12 +60,11 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     cmd = 'Oil'
   },
-  {
-    'lewis6991/gitsigns.nvim',
-    -- lazy = true,
-    cmd = 'Gitsigns'
-  },
-
+  -- {
+  --   'lewis6991/gitsigns.nvim',
+  --   -- lazy = true,
+  --   cmd = 'Gitsigns'
+  -- },
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },

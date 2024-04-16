@@ -1,7 +1,6 @@
 return {
   {
     'VonHeikemen/lsp-zero.nvim',
-    -- lazy = true,
     event = 'BufReadPre',
     config = function()
       local lsp = require('lsp-zero')
@@ -27,12 +26,12 @@ return {
         'cssmodules_ls',
         'tsserver',
         'eslint',
-        -- 'gopls',
         'lua_ls',
         'rust_analyzer',
         'denols',
         'tailwindcss',
         'tsserver',
+        'zls',
         'astro'
       })
 
@@ -61,6 +60,7 @@ return {
         buf_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
         buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
         if client.name ~= "tsserver" and client.name ~= "cssls" and client.name ~= 'rust_analyzer' then
+          -- print(vim.fs.dirname(vim.fs.find({ 'deno.json' }, { upward = true })[1]))
           print(client.name)
           vim.keymap.set("n", "<leader>s", function()
             local params = vim.lsp.util.make_formatting_params({})
@@ -103,7 +103,6 @@ return {
         root_dir = function()
           return vim.fs.dirname(vim.fs.find({ 'deno.json' }, { upward = true })[1])
         end
-        -- single_file_support = false,
       })
 
       lsp.configure('cssls', {
@@ -114,6 +113,11 @@ return {
       lsp.configure('rust_analyzer', {
         on_attach = on_attach,
       })
+
+      lsp.configure('zls', {
+        on_attach = on_attach,
+      })
+
 
       lsp.configure('gopls', {
         on_attach = on_attach,

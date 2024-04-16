@@ -1,5 +1,44 @@
 return {
   {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        suggestion = {
+          enabled = true,
+          auto_trigger = true,
+          keymap = {
+            accept = "<tab>",
+            -- accept_line = true
+          }
+        },
+        copilot_node_command = vim.fn.expand('$HOME') .. "/.n/n/versions/node/20.5.1/bin/node"
+      })
+    end,
+  },
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    branch = "canary",
+    cmd = { "CopilotChat", "CopilotChatFix", "CopilotChatOpen", "CopilotChatToggle", "CopilotChatExplain" },
+    dependencies = {
+      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+      { "nvim-lua/plenary.nvim" },  -- for curl, log wrapper
+    },
+    opts = {
+      -- debug = true, -- Enable debugging
+      -- See Configuration section for rest
+    },
+    -- See Commands section for default commands if you want to lazy load on them
+  },
+  {
+    "L3MON4D3/LuaSnip",
+    -- follow latest release.
+    version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+    -- install jsregexp (optional!).
+    build = "make install_jsregexp"
+  },
+  {
     "hrsh7th/nvim-cmp",
     event = 'InsertEnter',
     dependencies = {
@@ -9,6 +48,7 @@ return {
       "onsails/lspkind.nvim",
       "hrsh7th/cmp-cmdline",
       "windwp/nvim-autopairs",
+      "saadparwaiz1/cmp_luasnip"
     },
     config = function()
       local cmp = require("cmp")
@@ -24,15 +64,11 @@ return {
         formatting = {
           format = lspkind.cmp_format(),
         },
-        -- snippet = {
-        --   expand = function(args)
-        --     local luasnip = require("luasnip")
-        --     if not luasnip then
-        --       return
-        --     end
-        --     luasnip.lsp_expand(args.body)
-        --   end,
-        -- },
+        snippet = {
+          expand = function(args)
+            require("luasnip").lsp_expand(args.body)
+          end,
+        },
         mapping = cmp.mapping.preset.insert({
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -64,8 +100,14 @@ return {
           -- end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
+          -- {
+          --         name = "copilot",
+          --         group_index = 1,
+          --         priority = 100,
+          --       },
           { name = "nvim_lsp" },
-          -- { name = "luasnip" },
+
+          { name = "luasnip" },
         }, {
           { name = "buffer" },
         }),
