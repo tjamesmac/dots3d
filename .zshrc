@@ -1,6 +1,6 @@
 # Used for debugging startup
 # zmodload zsh/zprof
-#
+
 
 # m1 macbook check
 if [[ $(uname -m) == 'arm64' ]]; then
@@ -18,9 +18,12 @@ export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 export PATH=$PATH:$HOME/.toolbox/bin
 export PATH="$N_PREFIX/bin:$PATH"
 export PATH=~/.emacs.d/bin:$PATH
+export PATH=~/.config/emacs/bin:$PATH
 export PATH="$HOME/.emacs.d/bin:$PATH"
 export PATH="${HOME}/.cargo/bin:${PATH}"
-source ~/.zsh/func.zsh
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
 eval "$(zoxide init zsh)"
 eval "$(direnv hook zsh)"
@@ -44,27 +47,18 @@ fi
 # Source your static plugins file.
 source $zsh_plugins
 
-# PS1="λ %F{yellow}%~%f %F{cyan}% > "
-# PROMPT="%(?:%{$fg_bold[green]%}%1{➜%} :%{$fg_bold[red]%}%1{➜%} ) %{$fg[cyan]%}%c%{$reset_color%}"
-# PROMPT+=' $(git_prompt_info)'
-
-# ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
-# ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
-# ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[yellow]%}%1{✗%}"
-# ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
 autoload -Uz promptinit && promptinit && prompt pure
-
-
-
-
-
-# Used for debugging startup
-# zprof
-export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
 # bun completions
 [ -s "/Users/tmcauliffe/.bun/_bun" ] && source "/Users/tmcauliffe/.bun/_bun"
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+# pnpm
+export PNPM_HOME="/Users/tmcauliffe/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# Used for debugging startup
+# zprof

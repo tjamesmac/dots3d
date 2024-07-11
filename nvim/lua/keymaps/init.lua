@@ -57,12 +57,6 @@ vim.keymap.set(
   [[<Cmd>lua require('telescope.builtin').grep_string()<CR>]],
   { noremap = true, silent = true }
 )
--- vim.keymap.set(
---   "n",
---   "<Leader>fq",
---   [[<Cmd>lua require('telescope.builtin').quickfix()<CR>]],
---   { noremap = true, silent = true }
--- )
 
 -- Harpoon
 vim.keymap.set(
@@ -119,7 +113,16 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "gr", "<cmd>TroubleToggle lsp_references<CR>", { noremap = true, silent = true })
+-- vim.keymap.set("n", "gr", "<cmd>TroubleToggle lsp_references<CR>", { noremap = true, silent = true })
+-- vim.keymap.set('n', 'gr', function() require('telescope.builtin').lsp_references(), { noremap = true, silent = true })
+vim.keymap.set(
+  "n",
+  "gr",
+  function()
+    vim.cmd.Telescope('lsp_references')
+  end,
+  { noremap = true, silent = true }
+)
 -- Git
 vim.keymap.set("n", "<leader>g", "<cmd>Neogit<CR>", { noremap = true, silent = true })
 
@@ -148,110 +151,11 @@ vim.keymap.set({ 'n', 't' }, '<C-l>', '<cmd>NavigatorRight<CR>')
 vim.keymap.set({ 'n', 't' }, '<C-k>', '<cmd>NavigatorUp<CR>')
 vim.keymap.set({ 'n', 't' }, '<C-j>', '<cmd>NavigatorDown<CR>')
 
-
--- restore the session for the current directory
-vim.keymap.set("n", "<leader>qs", [[<cmd>lua require("persistence").load()<cr>]])
-
--- stop Persistence => session won't be saved on exit
-vim.keymap.set("n", "<leader>qd", [[<cmd>lua require("persistence").stop()<cr>]])
-
 -- Oil
 vim.keymap.set("n", "-", vim.cmd.Oil, { desc = "Open parent directory" })
 
 vim.keymap.set("n", "<S-Down>", "<nop>", { desc = "Open parent directory" })
 vim.keymap.set("n", "q:", ":", { desc = "Open parent directory" })
-
--- disable command history
--- vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" })
---
-local double_quotes = vim.treesitter.query.parse(
-  "javascript",
-  [[((lexical_declaration) @id)]]
--- [[((string) @id)]]
-)
-
-local function get_root(bufnr)
-  local parser = vim.treesitter.get_parser(0, 'javascript')
-  local tree = parser.parse(parser)[1]
-  vim.print(tree)
-  return tree:root()
-end
-
-
--- @todo need to handle new lines and... handle backticks?
--- @todo i guess that you can use the text of the whole node to check if it's appropriate
--- lexical_declaration, plus all the others and then check if they have ; at the end
-local practice = function(bufnr)
-  print "hello practice"
-  bufnr = bufnr or vim.api.nvim_get_current_buf()
-
-  if vim.bo[bufnr].filetype ~= "javascript" then
-    vim.notify "can only be used in javascript. should probably also be typescript"
-    return
-  end
-
-  local root = get_root(bufnr)
-
-  local changes = {}
-  for id, node, metadata in double_quotes:iter_captures(root, bufnr, 0, -1) do
-    local text = vim.treesitter.get_node_text(node, bufnr)
-    vim.print(text)
-    local range = { node:range() }
-    local replaced = string.gsub(text, "'", "\"")
-    table.insert(changes, 1,
-      { row_start = range[1], row_end = range[3], col_start = range[2], col_end = range[4], replaced = replaced })
-  end
-
-  for _, change in ipairs(changes) do
-    vim.api.nvim_buf_set_text(bufnr, change.row_start, change.col_start, change.row_end, change.col_end,
-      { change.replaced })
-  end
-end
-
-
-vim.keymap.set("n", "<leader>p", function()
-  practice()
-end, { desc = "Format files" })
-
-
-
--- local tree_thing = function()
---   local html_parser = vim.treesitter.get_string_parser(request.body, "javascript")
---   if not html_parser then
---     print "Must have html parser installed"
---     return
---   end
---
---   local tree = (html_parser:parse() or {})[1]
---   if not tree then
---     print "Failed to parse tree"
---     return
---   end
---
---   local query = vim.treesitter.query.parse(
---     "html",
---     [[
---       (
---        (element
---         (start_tag
---          (tag_name) @tag)
---         (text) @text
---        )
---
---        (#eq? @tag "title")
---       )
---     ]]
---   )
---
---   for id, node in query:iter_captures(tree:root(), request.body, 0, -1) do
---     local name = query.captures[id]
---     if name == "text" then
---       local title = vim.treesitter.get_node_text(node, request.body)
---       vim.api.nvim_input(string.format("a[%s](%s)", title, link))
---       return
---     end
---   end
--- end
 
 vim.g.copilot_no_tab_map = true
 vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })

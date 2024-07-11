@@ -11,11 +11,13 @@ alias gps="git push"
 alias gl="git log --pretty=format:'%C(Yellow)%h%Cgreen%d%Cblue %cl%Creset %s'"
 
 
+alias python="python3"
 alias ls="exa --all"
 
 alias gb="git branch --sort=-committerdate | gum filter | xargs git switch"
 
 alias dt="deno task"
+alias dr="deno run -A"
 
 alias vim="nvim"
 alias em="emacsclient -t -a ''"

@@ -13,14 +13,16 @@ return {
   },
   opts = {
     linters_by_ft = {
+      svelte = { "eslint_d" },
       javascript = { "eslint_d" },
       ["javascript.jsx"] = { "eslint_d" },
       javascriptreact = { "eslint_d" },
-      lua = { "luacheck" },
       typescript = { "eslint_d" },
-      -- typescript = { "deno" },
       ["typescript.tsx"] = { "eslint_d" },
+      -- modify this one when you want to use biomejs
       typescriptreact = { "eslint_d" },
+      lua = { "luacheck" },
+      -- typescript = { "deno" },
       yaml = { "yamllint" },
     },
     linters = {},
