@@ -28,3 +28,4 @@ alias lg="lazygit"
 
 # glab
 alias gvw="glab mr view --web"
+alias gmc="glab mr create"
