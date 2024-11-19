@@ -1,5 +1,5 @@
 # Used for debugging startup
-# zmodload zsh/zprof
+zmodload zsh/zprof
 
 
 # m1 macbook check
@@ -26,7 +26,7 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 eval "$(zoxide init zsh)"
-eval "$(direnv hook zsh)"
+# eval "$(direnv hook zsh)"
 # eval "$(starship init zsh)"
 # antidote load
 
@@ -61,4 +61,4 @@ esac
 # pnpm end
 
 # Used for debugging startup
-# zprof
+zprof
