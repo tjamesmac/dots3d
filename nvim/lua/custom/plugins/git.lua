@@ -5,8 +5,11 @@ return {
     "sindrets/diffview.nvim",
     "nvim-telescope/telescope.nvim",
   },
-  config = true,
-  -- keys = {
-  --   { '<leader>g', '<cmd>Neogit<CR>' },
-  -- },
+  config = function()
+    require('neogit').setup()
+  end,
+  cmd = "Neogit",
+  keys = {
+    { '<leader>g', '<cmd>Neogit<cr>', desc = "Neogit" },
+  },
 }

@@ -10,7 +10,7 @@ return {
             "yarn.lock",
             "deno.lock",
           },
-          layout_strategy = "bottom_pane",
+          layout_strategy = "vertical",
         },
       })
       require("telescope").load_extension("harpoon")

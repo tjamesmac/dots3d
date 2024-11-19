@@ -9,12 +9,12 @@ vim.keymap.set("n", "<Leader>`", function()
 end, { noremap = true, silent = true })
 
 
-vim.keymap.set("n", "<leader>f", function()
-  if vim.bo.filetype ~= 'go' and vim.bo.filetype ~= 'lua' and vim.bo.filetype ~= 'rust' then
-    print('Prettier')
-    return vim.cmd.Neoformat('prettier')
-  end
-end, { desc = "Format files" })
+-- vim.keymap.set("n", "<leader>f", function()
+--   if vim.bo.filetype ~= 'go' and vim.bo.filetype ~= 'lua' and vim.bo.filetype ~= 'rust' then
+--     print('Prettier')
+--     return vim.cmd.Neoformat('prettier')
+--   end
+-- end, { desc = "Format files" })
 
 -- Lint
 vim.keymap.set("n", "<leader>s", function()

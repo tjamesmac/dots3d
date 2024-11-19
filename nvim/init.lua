@@ -3,6 +3,11 @@ vim.g.globalstatus = true
 
 require("options")
 
+if vim.g.neovide then
+    vim.o.guifont = "Monaspace Neon:h20"
+end
+
+
 if vim.g.vscode then
   vim.keymap.set("i", "jk", "<ESC>", { noremap = true, silent = true })
   vim.keymap.set("i", "kj", "<ESC>", { noremap = true, silent = true })

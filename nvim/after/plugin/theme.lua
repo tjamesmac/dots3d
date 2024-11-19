@@ -1,4 +1,5 @@
 if not pcall(require, "github-theme") then
+-- if not pcall(require, "rose-pine") then
 -- if not pcall(require, "nightfox") then
   return
 end

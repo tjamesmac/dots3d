@@ -1,42 +1,9 @@
 return {
 
   { "nvim-lua/plenary.nvim" },
-  { "ThePrimeagen/harpoon", dependencies = "nvim-lua/plenary.nvim", keys = { { '<leader>ha' }, { '<leader>ha' } } },
-  {
-    "stevearc/dressing.nvim",
-    event = "BufReadPost",
-  },
-  -- {
-  --   'stevearc/conform.nvim',
-  --   opts = {},
-  --   config = function()
-  --     require('conform').setup({
-  --       javascript = { { "prettierd", "prettier" } }
-  --     })
-  --   end,
-  -- },
-  {
-    "windwp/nvim-autopairs",
-    opts = {},
-    -- lazy = true,
-    event = "BufReadPost",
-  },
-  -- {
-  --   "NeogitOrg/neogit",
-  --   opts = {
-  --     disable_commit_confirmation = true,
-  --     disable_insert_on_commit = false,
-  --   },
-  --   dependencies = "nvim-lua/plenary.nvim",
-  --   -- lazy = true,
-  --   cmd = 'Neogit'
-  -- },
-  -- {
-  --   "folke/trouble.nvim",
-  --   dependencies = "nvim-tree/nvim-web-devicons",
-  --   opts = {},
-  --   cmd = 'TroubleToggle'
-  -- },
+  { "ThePrimeagen/harpoon",   dependencies = "nvim-lua/plenary.nvim", keys = { { '<leader>ha' }, { '<leader>ha' } } },
+  { "stevearc/dressing.nvim", event = "BufReadPost", },
+  { "windwp/nvim-autopairs",  opts = {},                              event = "BufReadPost", },
   {
     -- move between tmux and nvim easily
     "numToStr/Navigator.nvim",
@@ -60,15 +27,23 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     cmd = 'Oil'
   },
-  -- {
-  --   'lewis6991/gitsigns.nvim',
-  --   -- lazy = true,
-  --   cmd = 'Gitsigns'
-  -- },
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {},
     event = "BufReadPost"
-  }
+  },
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {},
+    -- stylua: ignore
+    keys = {
+      { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+      { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+    },
+  },
 }
