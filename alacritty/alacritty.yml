@@ -16,11 +16,11 @@ window:
 font:
   size: 20.0
   normal:
-    # family: "Hack Nerd Font"
-    family: "Monaspace Neon"
-  bold:
-    # family: "Hack Nerd Font"
-    family: "Monaspace Neon"
+    family: "Hack Nerd Font"
+    # family: "Monaspace Neon"
+  # bold:
+  #   # family: "Hack Nerd Font"
+  #   family: "Monaspace Neon"
   italics:
     # family: "Hack Nerd Font"
     family: "Monaspace Neon"
